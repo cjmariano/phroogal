@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.phroogal</groupId>
-	<artifactId>phroogal-main</artifactId>
+	<artifactId>phrgl-wservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>phrgl-core</module>
-		<module>phrgl-web</module>
+		<module>phrgl-api</module>
 	</modules>
 
 	<properties>
