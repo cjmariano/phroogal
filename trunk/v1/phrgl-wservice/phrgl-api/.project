@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>phrgl-web</name>
+	<name>phrgl-api</name>
 	<comment></comment>
 	<projects>
 		<project>phrgl-core</project>
