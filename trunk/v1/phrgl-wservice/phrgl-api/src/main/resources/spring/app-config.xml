@@ -18,8 +18,8 @@
 			<list>
 				<value>classpath:phrgl-core.properties</value>
 				<value>file:${user.home}/phrgl-core.properties</value>
-				<value>classpath:phrgl-web.properties</value>
-				<value>file:${user.home}/phrgl-web.properties</value>
+				<value>classpath:phrgl-api.properties</value>
+				<value>file:${user.home}/phrgl-api.properties</value>
 			</list>
 		</property>
 		<property name="ignoreResourceNotFound" value="true" />
