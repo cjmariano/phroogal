@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Admin</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/default.css" rel="stylesheet" media="screen"/>
+	<link href="css/style.css" rel="stylesheet" media="screen"/>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="http://code.angularjs.org/1.0.7/angular-resource.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.1/lodash.min.js"></script>
+	<script src="scripts/bootstrap.js" xml:space="preserve"></script>	
+	<script src="http://twitter.github.io/typeahead.js/releases/0.9.3/typeahead.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/hogan.js/2.0.0/hogan.min.js"></script>
+	<script src="scripts/common_login.js"></script>
+	<script src="scripts/admin.js"></script>
+	<script src="scripts/phrgl-utils.js"></script>
+	<script src="scripts/cookie.js"></script>
+	<script type="text/javascript" src="scripts/modernizr.custom.js"></script>
+    <script type="text/javascript" src="scripts/classie.js"></script>
+    <style type="text/css">
+    .search-home-middle-content_add_new_question_box .middleDetailsContent_tbl{
+			width:415px;
+			margin-bottom:10px;
+		}
+		
+    	.seprator_link{
+    		background-color:#EEEEEE;
+    		width:100%;
+    		height:1px;
+    	}
+    	.select_category_link{
+    		display:block;
+    		text-decoration:none!important;
+    		width:190px!important;
+    		color:gray!important;
+    		padding:5px 5px 5px 5px!important;
+    	}
+    	.categoryText_seprator{
+    		background-color:#EEEEEE;
+    		width:100%;height:2px;
+    		margin-top:5px;
+    		margin-bottom: 5px;
+    	}
+	</style>
+</head>
+<body ng-app="admin-page" ng-controller="adminPageCtrl" style="font-family:Calibri;" class="cbp-spmenu-push">
+    <span sec:authorize="isAuthenticated()"> 
+    	<span  sec:authentication="principal.profile.email" id="login_user_email" style="display:none"></span>
+    	<span  id= "user_id" style="display:none;" sec:authentication="principal.id"></span>
+    </span>    
+    <div class="progress-loader-image" id="progress-image-loader" style="position:absolute;top:70px;left:40%;background-image: url('img/progress-loader.gif');display:none;width:32px;height:32px;"></div>
+    <div th:include="headerProfileTemplate" ng-controller="commonLoginCtrl"></div>
+   	<div class="container main-container" id="main-container-content"  style="margin-top:45px;">
+	    <div id="admin_page_container_div" th:include="AdminPageContentTemplate" ng-init="initFunctionCall()"></div>
+	</div>
+	<div th:include="footerTemplate"></div>	
+</body>
+</html>

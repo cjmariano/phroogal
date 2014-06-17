@@ -1,0 +1,205 @@
+package com.phroogal.core.drools;
+
+import com.phroogal.core.domain.*;
+import com.phroogal.core.rule.RulesContext;
+import com.phroogal.core.rule.RuleExecutionContext;
+import com.phroogal.core.social.SocialNetworkType;
+import com.phroogal.core.search.index.QuestionIndex;
+
+
+/*
+ * ----------------------------------------------------------------------------
+ * Answer Hierarchy rules - Default rank to total votes 
+ * ----------------------------------------------------------------------------
+ */
+rule "set-answer-rank"
+	lock-on-active true
+  	salience 100
+  	
+		when
+			$answer : Answer( rank == 0, votes.total > 0, $totalVotes : votes.total )
+		then
+			modify($answer){setRank( $totalVotes )};
+end
+
+
+/*
+ * ----------------------------------------------------------------------------
+ * Answer Hierarchy rules - by highest votes 
+ * ----------------------------------------------------------------------------
+ */
+rule "answer-hierarchy-vote-validation"
+	lock-on-active true
+  	salience 60
+  	
+		when
+			RulesContext( $answerWeightVotes : answerWeightVotes )
+			$highestVote : Number() 
+				from accumulate( Answer( $votes : votes.total ),
+         		max( $votes ) )
+         	$answer : Answer( $rank : rank, votes.total > 0, votes.total == new Integer($highestVote) )
+		then
+			modify($answer){ setRank( $rank + $answerWeightVotes ),
+				addAnswerSortType(AnswerSortType.VOTES) };
+end
+
+
+/*
+ * ----------------------------------------------------------------------------
+ * Answer Hierarchy rules - by social contacts FACEBOOK 
+ * ----------------------------------------------------------------------------
+ */
+rule "answer-hierarchy-socialNetwork-facebook-validation"
+ 	lock-on-active true
+  	salience 59
+  	
+	  	when
+	  		RulesContext( $answerWeightFacebook : answerWeightFacebook )
+	  		$answer : Answer( $rank : rank, $socialProfiles : postBy.socialProfiles )
+	  		$socialProfile : SocialProfile( site == SocialNetworkType.FACEBOOK ) from $socialProfiles
+	  		SocialContact ( contactUserId == $socialProfile.userId.toString() )
+	  	then
+	  		modify($answer){setRank( $rank + $answerWeightFacebook ),
+	  			addAnswerSortType(AnswerSortType.SOCIAL_MEDIA_FACEBOOK)};
+end
+
+/*
+ * ----------------------------------------------------------------------------
+ * Answer Hierarchy rules - by social contacts TWITTER 
+ * ----------------------------------------------------------------------------
+ */
+rule "answer-hierarchy-socialNetwork-twitter-validation"
+ 	lock-on-active true
+  	salience 58
+  	
+	  	when
+	  		RulesContext( $answerWeightTwitter : answerWeightTwitter )
+	  		$answer : Answer( $rank : rank, $socialProfiles : postBy.socialProfiles )
+	  		$socialProfile : SocialProfile( site == SocialNetworkType.TWITTER ) from $socialProfiles
+	  		SocialContact ( contactUserId == $socialProfile.userId.toString() )
+	  	then
+	  		modify($answer){setRank( $rank + $answerWeightTwitter ),
+	  			addAnswerSortType(AnswerSortType.SOCIAL_MEDIA_TWITTER)};
+end
+
+
+/*
+ * ----------------------------------------------------------------------------
+ * Answer Hierarchy rules - by social contacts GOOGLE 
+ * ----------------------------------------------------------------------------
+ */
+rule "answer-hierarchy-socialNetwork-google-validation"
+ 	lock-on-active true
+  	salience 57
+  	
+	  	when
+	  		RulesContext( $answerWeightGoogle : answerWeightGoogle )
+	  		$answer : Answer( $rank : rank, $socialProfiles : postBy.socialProfiles )
+	  		$socialProfile : SocialProfile( site == SocialNetworkType.GOOGLE ) from $socialProfiles
+	  		SocialContact ( contactUserId == $socialProfile.userId.toString() )
+	  	then
+	  		modify($answer){setRank( $rank + $answerWeightGoogle ),
+	  			addAnswerSortType(AnswerSortType.SOCIAL_MEDIA_GOOGLE)};
+end
+
+
+/*
+ * ----------------------------------------------------------------------------
+ * Answer Hierarchy rules - by social contacts LINKEDIN 
+ * ----------------------------------------------------------------------------
+ */
+rule "answer-hierarchy-socialNetwork-linkedin-validation"
+ 	lock-on-active true
+  	salience 56
+  	
+	  	when
+	  		RulesContext( $answerWeightLinkedIn : answerWeightLinkedIn )
+	  		$answer : Answer( $rank : rank, $socialProfiles : postBy.socialProfiles )
+	  		$socialProfile : SocialProfile( site == SocialNetworkType.LINKEDIN ) from $socialProfiles
+	  		SocialContact ( contactUserId == $socialProfile.userId.toString() )
+	  	then
+	  		modify($answer){setRank( $rank + $answerWeightLinkedIn ),
+	  			addAnswerSortType(AnswerSortType.SOCIAL_MEDIA_LINKEDIN)};
+end
+
+/*
+ * ----------------------------------------------------------------------------
+ * Answer Hierarchy rules - by Location 
+ * ----------------------------------------------------------------------------
+ */
+rule "answer-hierarchy-location-validation"
+ 	lock-on-active true
+  	salience 25
+  	
+	  	when
+	  		RulesContext( $answerWeightLocation : answerWeightLocation )
+	  		$answer : Answer( $rank : rank, $postByUser : postBy, $postByUserLocation : postBy.profile.location.state )
+	  		User ( id != $postByUser.id, $postByUserLocation != null, profile.location.state == $postByUserLocation )
+	  	then
+	  		modify($answer){setRank( $rank + $answerWeightLocation ),
+	  			addAnswerSortType(AnswerSortType.LOCATION)};
+end
+
+/*
+ * ----------------------------------------------------------------------------
+ * Trending Question rules 
+ * ----------------------------------------------------------------------------
+ */
+ rule "question-trending-validation"
+ 	lock-on-active true
+  	salience 50
+  	
+	  	when
+	  		$question : Question ($totalViewCount : totalViewCount, $totalAnswerCount : totalAnswerCount)
+	  	then
+	  		modify($question){
+	  			setTrendingRank( new Double($totalViewCount) + new Double($totalAnswerCount) )
+	  		};
+end
+
+/*
+ * ----------------------------------------------------------------------------
+ * Trending Tags rules 
+ * ----------------------------------------------------------------------------
+ */
+ rule "tag-trending-validation"
+ 	lock-on-active true
+  	salience 50
+  	
+	  	when
+	  		$tag : Tag( $tagName : name, $rank : rank )
+			$totalNumQuestionsTagged : Long()
+      			from accumulate( $i : QuestionIndex( tags contains($tagName) ), 
+      			count( $i ) )
+      		$totalNumViewsForQuestionsTagged : Double() 
+				from accumulate(QuestionIndex ( $totalViewCount : totalViewCount, tags contains($tagName) ),
+				sum( $totalViewCount ) )
+	  		$executionContext : RuleExecutionContext();
+	  		 
+	  	then
+	  		modify($tag){
+	  			setTotalNumQuestionsTagged ( $totalNumQuestionsTagged ), 
+	  			setTotalNumViewsForQuestionsTagged ( new Double($totalNumViewsForQuestionsTagged).longValue() ),
+	  			setRank ( ($totalNumViewsForQuestionsTagged * .7) + ($totalNumQuestionsTagged * .3) )
+	  		};
+	  		$executionContext.addResult( $tag );
+end
+
+/*
+ * ----------------------------------------------------------------------------
+ * Social Contacts Filter 
+ * ----------------------------------------------------------------------------
+ */
+rule "social-contacts-filter"
+ 	lock-on-active true
+  	salience 59
+  	
+	  	when
+	  		$user : User( $socialProfiles : socialProfiles )
+	  		$socialContact : SocialContact ( $connectedThru : connectedThru,  $contactUserId : contactUserId )
+	  		SocialProfile( site == $connectedThru, userId == $contactUserId ) from $socialProfiles
+	  		$executionContext : RuleExecutionContext();
+	  	then
+	  		$executionContext.addResult( $socialContact.getUserId() );
+end
+

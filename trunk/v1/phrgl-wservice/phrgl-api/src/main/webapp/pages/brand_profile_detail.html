@@ -1,0 +1,109 @@
+
+<div class="brand_profile_page" ng-app="brandProfileDetail"   ng-controller="brandProfileDetailCtrl" ng-init="initFunctionCall()" >
+	<div class="brand_profile_page_content brand_profile_page_content_left" style="float:left;width:650px;">
+		<div class="brand_profile_content" style="padding:15px 1px 5px 1px;color:black;font-size:17px;">
+			<div class="brand_profile_content_row" >
+				<div class="brand_profile_content_row_left" style="float:left;width:175px;height:150px;">
+					<img id="brand_profile_logo" src="{{brandLogo}}" style="width:150px;height:135px" />
+				</div>				
+				<div class="brand_profile_content_row_right" style="float:left;">
+					<div style="font-weight:bold;font-size:16px;">{{brandName}}</div>
+					<div style="clear:both;margin-top:3px;font-size:14px">{{brandSortDesc}}</div>
+					<div style="clear:both;margin-top:3px;">
+						<div id="content_label" class="content_label" style="float:left;margin:2px 10px 0px 0px;font-size:14px">Tags</div>
+						<div id="content_tags_value" style="float:left;font-size:12px;"></div>
+					</div>
+					<div style="clear:both;padding-top:8px;font-size:14px">
+						<span >Website:</span>&nbsp;
+						<span><a target="_blank" href="{{brandUrl}}">{{brandUrl}}</a></span>
+					</div>
+				</div> 
+				<div class="brand_profile_content_row_right" style="float:right;margin-top:60px;">
+				 	<div class="row">
+				 	    <div style="padding:5px;background-color:#ef7e2a;float:left;">
+				 			<img src="../img/face-icon.png" style="width:35px;height:35px;"/>
+				 		</div>
+				 		<div id="brandAvgRecommend" style="padding: 10px 0 15px 48px;color:black;font-size:20px;font-weight:bold;margin-left:6px;">0</div>
+				 	</div>
+				 	<div class="row" style="padding:5px 15px;background-color:#ef7e2a;color:white;font-size:13px;margin-top:5px;">
+				 		Recommend
+				 	</div>
+				</div>
+			</div>
+			<div class="brand_profile_content_row" style="clear:both;margin-top:5px;font-size:14px">
+				{{brandLongDesc}}
+			</div>		
+		</div>
+		<div style="padding:8px;height:20px;margin-top:15px;border-top:3px solid #6496cb;border-bottom:3px solid #EEEEEE;font-size:15px;font-color:black;font-weight:bold;">
+			<div style="float:left;">
+				<span id="total_reviews" onclick="showAllReviews()" style="cursor:pointer;color:black;">Reviews&nbsp;(<span id="reviews_count"></span>)&nbsp;</span> |
+				<span id="total_questions" onclick="showAllQuestions()" style="cursor:pointer;color:gray;">&nbsp;Q&amp;A&nbsp;(<span id="questions_count"></span>)</span>
+				<span id="total_text_show">&nbsp;|&nbsp;All</span>
+			</div>
+			<div style="float:right;color:#003366;cursor: pointer;" onclick="setFocusOnAddReview()">Add Your Review</div>
+		</div>
+		<div id="brand_profile_reviews_form_content">				
+			<div class="brand_profile_reviews_content" style="clear:both;"></div>	
+			<div class="profile_form_content" style="clear:both;">
+				<form name="addNewreviewToBrand">
+					<div class="addReviewform_profile-control">
+						<textarea id="reviewTitle" placeholder="Add review title" style="width:635px;height:20px;font-size:14px;" required="required" ng-model="reviewTitle"></textarea>
+					</div>
+					<div class="addReviewform_profile-control">
+						<textarea  id="reviewDetail" placeholder="Add review description" style="width:635px;min-height:40px;font-size:14px;" ng-model="reviewDesc"></textarea>
+			    	</div>
+			    </form>
+		    	<div class="addReviewform_next_row">
+					<div class="profile_controls_label" style="float:left;width:130px;color:black;">Recommend to friends and family?</div>
+					<div class="profile_controls" style="float:left;">
+						<div   id="likeReviewDiv" style="padding:5px;background-color:#ef7e2a;float:left;cursor: pointer;" onclick="likeToReview()">
+				 			<img src="../img/face-icon.png" style="width:35px;height:35px;"/>
+				 		</div>
+					</div>
+		
+					<div class="profile_controls" style="float:right;">
+		   				<div style="float:left;padding-top:0px;padding-bottom:10px;">
+		   				    <div style="padding-bottom:5px">
+		   						<input id="postAsAnonymousReview" type="checkbox" style="margin-right:5px;margin-top:-3px;font-size:11px;font-size:10px;"/>Review Anonymously
+		   					</div>
+		     	        	<button type="button" class="btn btn-add-new-question btn-warning pull-right" ng-click="addBrandProfileReview()" ng-disabled="addNewreviewToBrand.$invalid">Add Review</button>
+		     	        </div>
+		     	   </div>	
+				</div>				
+			    <div class="profile-control-footer" style="height:50px;width:100%;">
+				</div>
+			</div>
+		</div>
+		<div id="questions_search_result_content" style="clear:both;display:none;">				
+		</div>				
+	</div>
+	<div class="brand_profile_page_content_right" style="width:300px;float:left;display:block;padding: 20px 0 0 30px;">
+		<div id="brand_profile_page_content_right_add_new_question_box" style="padding:5px;padding-top:0px;">
+			<div class="controls" style="margin-bottom:5px;color:#003366;font-size:14.5pt;font-weight:bold;">
+              Add a Question
+   			</div>
+   			<form name="addNewQuestionRight" style="margin: 0 0 0px;">
+				<div class="controls">
+			    	<textarea  id="addNewQuestionRightTitle" style="width:270px;height:20px;font-size:14px;" placeholder="Enter Question"  ng-model="rightNewQuestionTitle" required="required"></textarea>
+	   			</div>	   							
+	   			<div class="controls">
+	   				<textarea   id="addNewQuestionRightDetail" style="width:270px;height:20px;font-size:14px;"  placeholder="Add details for more specific answers" ng-model="rightNewQuestionDescription"></textarea>
+	     	    </div>
+	     		<div class="controls" id="rightCategorySearch">
+	     		    <div class="right_selected_categories" style="padding-top:2px;padding-bottom:12px;display:none;"></div>
+	     		    <div class="right_question_tags_category_limit_error_alert" style="padding:2px;display:none;color:red">You can only add upto 5 tags.</div>
+	     			<div class="right_selected_categories_empty_error" style="padding:2px;display:none;color:red">Please select at least one tag.</div>
+		            <div class="right_selected_categories_non_exist_tag_error" style="padding:2px;display:none;color:red">Not a valid tag.</div>
+			        <input type="text" id="rightSelectedCategory" style="width:270px"  placeholder="Add at least one tag, max 5 tags" auto-complete="" ui-items="categoryNames" ng-model="categorySelected"/>
+		    	</div>
+	    	</form>
+	 		<div class="controls">
+   				<div style="float:left;padding-top:15px;padding-bottom:10px;">
+   					<input id="postAsAnonymousRight" type="checkbox" style="margin-right:7px;margin-top:-3px;"/>Post as Anonymous</div> 
+     	        <div style="float:right;padding-top:10px;padding-bottom:10px;margin-right:5px;">
+     	        	<button type="button" class="btn btn-warning pull-right" ng-click="addNewRightQuestionButton()" ng-disabled="addNewQuestionRight.$invalid">Add Question</button>
+     	        </div>
+     	  </div>	     					    
+		</div>
+	</div>	  	
+</div>

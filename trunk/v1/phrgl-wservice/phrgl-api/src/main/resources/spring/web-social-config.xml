@@ -1,0 +1,33 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/aop   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+	<bean id="connectionRepository" factory-method="createConnectionRepository" factory-bean="usersConnectionRepository" scope="request">
+		<constructor-arg value="#{authenticationDetailsService.getAuthenticatedUserId()}" />
+		<aop:scoped-proxy proxy-target-class="false" />
+	</bean>
+	
+	<bean id="connectController" class="org.springframework.social.connect.web.ConnectController" autowire="constructor">
+		<property name="connectInterceptors">
+	        <list>
+	            <bean class="com.phroogal.web.social.FacebookConnectInterceptor">
+	            	<property name="permissions" value="email, user_birthday, offline_access, user_hometown"/>
+	            </bean>
+	            <bean class="com.phroogal.web.social.TwitterConnectInterceptor"/>
+	            <bean class="com.phroogal.web.social.LinkedInConnectInterceptor">
+	            	<property name="permissions" value="r_fullprofile r_emailaddress r_contactinfo r_network"/>
+	            </bean>
+	            <bean class="com.phroogal.web.social.GoogleConnectInterceptor">
+	            	<property name="permissions" value="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.circles.read"/>
+	            </bean>
+	        </list>
+	    </property>
+	</bean>
+	<bean id="core.connectionSignUp" class="com.phroogal.web.social.WebLocalConnectionSignUp"/>
+	
+</beans>

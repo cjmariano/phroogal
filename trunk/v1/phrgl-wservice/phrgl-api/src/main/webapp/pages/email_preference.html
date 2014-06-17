@@ -1,0 +1,148 @@
+<div class="email_preference_page" ng-app="settings" ng-controller="settingsCtrl">
+	<div class="email_preference_page_content_left" style="width:550px;float:left;">
+		<div class="row_start">
+			<p class="row_title">
+				<strong>Email Preferences</strong>
+			</p>
+			<p class="row_title">
+				<strong>Community</strong>
+			</p>
+			<div class="email_preference_info">				
+					<div class="email_preference_row">
+						<div class="email_preference_left_col">When a new blog is posted on the Phroogal Blog</div>
+				    	<div class="email_preference_right_col" >
+				    		 <input id="new_blog_checkbox" type="checkbox" checked="checked" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When the community achieves a milestone</div>
+				    	<div class="email_preference_right_col" >
+				    	<input id="achieves_miledtone" type="checkbox" checked="checked" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When questions are posted reflecting my interests</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked" id="reflecting_interests" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When questions are posted similar to questions I’ve answered</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked" id="questions_similar_to_questions" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When answers are given to similar questions I’ve posted</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked" id="answer_similar_to_questions" />
+				    	</div>
+				    </div>
+				    <p class="row_title">
+						<strong>Personal</strong>
+					</p>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When a change occurs in my profile</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked"  id="change_occures_in_profile"/>
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">About my monthly community activity</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked"  id="monthly_community_activity" />
+				    	</div>
+				    </div>
+				    <p class="row_title">
+						<strong>Questions &amp; Answers</strong>
+					</p>
+					<div class="email_preference_row">
+						<div class="email_preference_left_col">When an answer is given to a question I posted</div>
+				    	<div class="email_preference_right_col" >
+				    		<input type="checkbox" checked="checked"  id="answer_given_to_question" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When a comment is made to an answer on a question I posted</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" ng-model="email_preferences.comment_is_made_to_an_answer" id="comment_is_made_to_an_answer" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When my answers are voted up</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked" id="answers_are_voted_up" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When an answer is added to a question I’m following</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox"  id="answer_is_added_to_a_question" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When a question is posted on a topic I’m following</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked" id="question_is_posted_on_a_topic" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When a comment is made on my answer</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox"  id="comment_is_made_on_my_answer" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When a reply is made to my comment</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked"  id="reply_is_made_to_my_comment" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">Whenever someone in my social network answers a question I’ve posted</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked"  id="social_network_answers_a_question" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When someone in my social network asks a question on a topic I’m following</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked"  id="social_network_asks_question" />
+				    	</div>
+				    </div>
+				    <p class="row_title">
+						<strong>Ratings &amp; Reviews</strong>
+					</p>
+					<div class="email_preference_row">
+						<div class="email_preference_left_col">When a comment is posted on a review I made</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked"  id="comment_is_posted_on_review" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When a comment is posted on product I’ve added</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked" id="comment_is_posted_on_product" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When a question is tagged with a product I’ve added</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked"  id="question_is_tagged_with_a_product" />
+				    	</div>
+				    </div>
+				    <div class="email_preference_row">
+						<div class="email_preference_left_col">When a rating or review is posted on a brand I’m following</div>
+				    	<div class="email_preference_right_col" >
+				    	<input type="checkbox" checked="checked"  id="rating_or_review_posted" />
+				    	</div>
+				    </div>
+				</div>
+		    </div>
+       </div>
+       <div style="float:right;margin-top:25px;width:190px;">
+       		<div style="text-align: right;"><a href="" ng-click="settings()" style="color:#19558D;">Settings</a></div>
+       		<div style="text-align: right;"><a href="" ng-click="privacy_settings()" style="color:#19558D;">Privacy Settings</a></div>
+			<div style="font-weight: bold;color:black;text-align: right;">Email Preference</div>
+	   </div> 
+   </div>		   

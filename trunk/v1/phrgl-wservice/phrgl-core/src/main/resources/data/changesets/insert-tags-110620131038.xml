@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mongoChangeLog>
+    <changeSet changeId="insert-tags-autoloan" author="Christopher Mariano">
+        <script>
+            db.tags.insert({"name" : "Auto/Car Loans"});
+        </script>
+    </changeSet>
+</mongoChangeLog>
