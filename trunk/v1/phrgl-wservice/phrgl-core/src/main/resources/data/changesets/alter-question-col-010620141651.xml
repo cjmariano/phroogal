@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mongoChangeLog>
-    <changeSet changeId="alter-question-col-checkAnonymous" author="Christopher Mariano">
-        <script>
-            db.questions.update({},{$rename: {'checkAnonymous':'isAnonymous'}}, false, true);
-        </script>
-    </changeSet>
-</mongoChangeLog>
