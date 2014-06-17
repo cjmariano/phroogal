@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="http://angularjs.org">
+<head>
+	<title>Privacy &amp; Policy </title>
+	<link rel="shortcut icon" href="favicon.ico"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/default.css" rel="stylesheet" media="screen"/>
+    <link href="css/default.css" rel="stylesheet" media="screen"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="http://code.angularjs.org/1.0.7/angular-resource.min.js"></script>
+	<script src="scripts/bootstrap.js" xml:space="preserve"></script>
+	<link href="css/style.css" rel="stylesheet" media="screen"/>
+    <script type="text/javascript" src="scripts/modernizr.custom.js"></script>
+    <script type="text/javascript" src="scripts/classie.js"></script>
+	
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-34381556-1', 'phroogal.com');
+	  ga('send', 'pageview');
+	</script>
+</head>
+<body class="landing-page cbp-spmenu-push"  ng-app="signin" ng:controller="LoginCtrl">	
+	<div th:include="headerTemplate"></div>
+	<div th:include="signupFormTemplate"></div>
+	<div th:include="loginAndSignupFormTemplate"></div>
+	<div th:include="forgotPasswordFormTemplate"></div>
+	<div th:include="messagePageTemplate"></div>
+	<a id="error_message_link" data-toggle="modal" href="#messageModal" data-dismiss="modal" style="width:0px;height:0px"></a>
+    
+    <div class="container main-container" style="margin-top:70px;">
+        <div class="login-error" style="display:none">
+			<div class="alert alert-error">  
+	  			<strong>Oops!</strong> It seems like you haven&apos;t joined Phroogal yet. You could join by using your social network below!  
+			</div>
+	    </div>
+		<div th:include="privacyPolicyTemplate" style="padding-top:2%;padding-bottom:2%;height:95%;"></div>
+	</div>
+    <div th:include="signinFooterTemplate"></div>
+    <script src="scripts/login.js"></script>
+</body>
+</html>

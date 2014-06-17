@@ -1,0 +1,251 @@
+<div class="settings_page" ng-app="settings"   ng-controller="settingsCtrl">
+	<div class="settings_page_content" style="width:725px;margin-left:250px;" ng-init="getLoginUserObj()">  
+		<div class="row_first" style="border-bottom: 1px solid #E0E0E0;">
+			<p class="row_title">
+				<strong>Account</strong>
+			</p>
+			<div class="account_info">
+			     <div class="row_padding" style="height:15px;">
+					<div class="user_fname" style="float:left;">
+				   		<label class="left_col" style="margin-bottom:1px;">First Name:</label>			   	 		
+				   		<span style="float:left"  ng-hide="fnameEditorEnabled" >{{fname}}	  	    
+				   			<a class="fname_edit edit" href="#" ng-click="fnameEnableEditor()">Edit</a>
+				   		</span>	
+			   		</div>
+			   		<div class="user_change_fname" ng-show="fnameEditorEnabled" style="display:none;float:left;"> 
+				     	<div style="float:left;">
+							<form  accept-charset="UTF-8" name="userFnameForm" style="clear:both;margin: 0 0 0 0px;">						    	
+					     		<input id="user_fname_text_box" type="text" placeholder="Enter firstname" ng-model="fnameText"  required="required"/>
+					    	</form>
+					    </div>
+					    <div style="margin-left:6px;float:left;">
+				        	<button type="submit" ng-disabled="userFnameForm.$invalid" class="btn btn-primary" ng-click="saveFname()">
+				        		Update
+				        	</button>
+		        			<a href="#" ng-click="fnameDisableEditor()">Close</a>
+		        		</div>
+	    			</div>
+	    	     </div>
+    		     <div class="row_padding" style="clear:both;height:15px;">
+					<div class="user_lname" style="float:left;">
+				   		<label class="left_col" style="margin-bottom:5px;">Last Name:</label>			   	 		
+				   		<span style="float:left"  ng-hide="lnameEditorEnabled" >{{lname}}	  	    
+				   			<a class="lname_edit edit" href="#" ng-click="lnameEnableEditor()">Edit</a>
+				   		</span>	
+			   		</div>
+			   		<div class="user_change_lname" ng-show="lnameEditorEnabled" style="display:none;float:left;">
+			   		   	<div style="float:left;">						
+				   		   	<form  accept-charset="UTF-8" name="userLnameForm" style="clear:both;margin: 0 0 0 0px;">						    	
+					     		<input  id="user_lname_text_box" type="text" placeholder="Enter lastname" ng-model="lnameText"  required="required"/>
+					     	</form>
+					    </div>
+					    <div style="margin-left:6px;float:left;">
+					    	<button ng-disabled="userLnameForm.$invalid"  type="submit" class="btn btn-primary" ng-click="saveLname()">Update</button>
+			        		<a href="#" ng-click="lnameDisableEditor()">Close</a>
+			        	</div>
+	    			</div>
+	    	     </div> 			 
+			     <div class="row_padding"> 
+					<div class="primary_email row_padding">
+						<div class="left_col" style="float:left;">Primary Email</div>
+				    	<div class="parimary_email_right_col" >
+				    		<span style="border-bottom: 1px solid #E0E0E0;font-weight: bold;">{{email}}</span>				    		
+				    	</div>
+				    </div>
+				    <div class="other_emails">
+				        <div class="other_emails show_Alt_email" ng-show="altEmailEditorEnabled" style="display:none;">
+				        	<div class="left_col">Alternate Email</div>
+				    		<div class="parimary_email_right_col" >
+				    			<span style="border-bottom: 1px solid #E0E0E0;font-weight: bold;">{{altEmail}}</span>				    		
+				    		</div>
+				    	</div>
+				    	<div class="other_email_info_parent" ng-show="otherEmailEditorEnabled" style="display:none;">
+							<div class="other_email_info"  ng-model="altEmail" ng-hide="addAnotherEmailEditorEnabled">
+								<div class="left_col"> &nbsp;</div>
+					    		<div>
+					    			<a href="#" ng-click="addAnotherEmailEnableEditor()">Add Another Email Address</a>
+					    		</div>
+					    	</div>
+					    	<div class="add_another_email" ng-show="addAnotherEmailEditorEnabled" style="display: none">
+							    <div>
+							    <div class="left_col"> &nbsp;</div>
+							    <span> 
+									<input type="email" placeholder="Add  email address" name="add_another_email" ng-model="altEmailInput" required="required"/>
+			   					</span>
+			   					</div>
+			   					<div>
+			   						<div class="left_col"> &nbsp;</div>
+			   						<button type="button" class="btn btn-primary btn-txt" ng-click="addAnotherEmail()">Add Email</button>
+	  				    	    	<button type="button" class="btn btn-txt" ng-click="addAnotherEmailDisableEditor()">Cancel</button>
+	  				    	    </div>
+	  				    	</div>
+	  				    </div>
+				    </div>
+				</div>				 
+			    <div class="row_padding" id="user_change_password_content" style="display:none;">			    	
+			    	<div class="right_col1" ng-hide="changePasswordEditorEnabled">
+						<div class="left_col forChangePassword">Password</div>
+						<a href="#" ng-click="changePasswordEnableEditor()">Change Password</a>
+				    </div>  								
+					<div class="right_col2" ng-show="changePasswordEditorEnabled" style="display: none">						
+						<div class="left_col forChangePassword" style="height:160px;">Password</div>
+						<form class="form-horizontal" accept-charset="UTF-8" name="changePasswordForm">
+							<div class="user_change_password">						    
+					    		 <div class="controls" style="margin-bottom:10px;">
+					    			<input type="password" placeholder="Old Password" name="old_password" ng-model="sOldPassword" required="required"/>
+	   							</div>	   							
+	   							<div class="controls" style="margin-bottom:10px;">
+	   								<input type="password" id="inputPassword" placeholder="Password" ng-model="sPassword"  required="required"/>
+	     						</div>
+	     						<div class="controls" style="margin-bottom:10px;">
+	     							<input type="password" id="inputPasswordConfrim" placeholder="Confirm Password" name="confirm_password" ng-model="sConfirmPassword" required="required" data-password-verify="sPassword"/>
+								    <span class="sError" ng-show="changePasswordForm.confirm_password.$error.passwordVerify">Not Matched</span>	
+	     						</div>
+	     						<div class="controls">
+									<button type="button" ng-disabled="changePasswordForm.$invalid" class="btn btn-primary btn-txt" ng-click="changePassword()">Change Password</button>
+		        					<button type="button" class="btn btn-txt" ng-click="changePasswordDisableEditor()">Cancel</button>
+  				    		    </div>
+  				    		</div>
+  				    	</form>
+  				    </div>   
+			    </div>
+	        </div>
+		</div>
+		<div class="row_next" style="margin-top:25px;border-bottom: 1px solid #E0E0E0;">
+			<p class="row_title row_padding">
+				<strong>Other Details</strong>
+			</p>
+    		<div style="height: 35px">
+    			<span class="user_dob">
+			   		<label class="left_col">Date Of  Birth:</label>
+			   		<span style="float:left"   ng-hide="dobEditorEnabled">{{dob}}			    
+			   		<a class="dob_edit edit" href="#" ng-click="dobEnableEditor()">Edit</a></span>
+			   	</span>
+			   	<span class="user_change_dob" ng-show="dobEditorEnabled" style="display: none"> 
+			      <!--   <input type="date" ng-model="dobInput" datepicker=""  />--> 
+			      <input type="text" id="datepicker" style="margin-bottom: 10px;width:250px;background-color:white;cursor: pointer;" readonly="readonly"/>
+	        		<button type="submit" class="btn btn-primary" ng-click="saveDOB()" style="margin-top:-10px;">Update</button>
+	        		<a href="#" ng-click="dobDisableEditor()">Close</a>
+	    		</span>			   	
+    		</div>
+    		<div style="height: 35px">
+    			<span class="user_marital_status">
+			   		<label class="left_col">Marital Status:</label>
+			   		<span style="float:left"  ng-hide="statusEditorEnabled">{{maritalStatus}}			    	
+			   			<a class="status_edit edit" href="#" ng-click="statusEnableEditor()">Edit</a>
+			   		</span>
+			   	</span>
+			   	<span class="user_change_status" ng-show="statusEditorEnabled" style="display: none"> 
+			    	<select ng-model="selectedStatus" ng-options="item as item.name for item in status" style="width:250px"></select>
+	        		<button type="submit" class="btn btn-primary" ng-click="saveMaritalStatus()" style="margin-top:-10px;">Update</button>
+	        		<a href="#" ng-click="statusDisableEditor()">Close</a>
+	    		</span>			   	
+    		</div>
+    		<div style="height: 35px">
+    			<span class="user_gender">
+			   		<label class="left_col">Gender:</label>			   	 		
+			   		<span style="float:left"  ng-hide="genderEditorEnabled" >{{sex}}	  	    
+			   			<a class="gender_edit edit" href="#" ng-click="genderEnableEditor()">Edit</a>
+			   		</span>	
+			   	</span>
+			   	<span class="user_change_gender" ng-show="genderEditorEnabled" style="display: none"> 
+			    	<select ng-model="selectedGender" ng-options="item as item.name for item in genders" style="width:250px;">
+			    	</select>
+	        		<button type="submit" class="btn btn-primary" ng-click="saveGender()" style="margin-top:-10px;">Update</button>
+	        		<a href="#" ng-click="genderDisableEditor()">Close</a>
+	    		</span>
+    		</div>
+    		<!-- <div style="height: 35px">
+    			<span class="user_highest_education">
+			   		<label class="left_col">Highest	Level	of	Education:</label>
+			   		<span style="float:left"  ng-hide="educationStatusEditorEnabled">{{education}}{{college}}			    
+			   			<a class="education_status_edit edit" href="#" ng-click="educationStatusEnableEditor()">Edit</a>
+			   		</span>
+			   	</span>
+			   	<div class="user_highest_education" ng-show="educationStatusEditorEnabled" style="display: none;float:left"> 
+			    	<div style="float:left;margin-top:8px;margin-right:5px;"><select ng-model="selectedHighestEducation" ng-options="item as item.name for item in educations" style="width:155px;margin-top:-8px;" ng-change="updateUserHigestEducation()">
+			    		 <option value="">Chose Highest Education</option>
+			    		 </select>
+			    	</div>
+	        		<div style="width:220px;float:left">
+	        			<input  class="college-control" id="college-control" type="text" placeholder="Select College" style="width:200px;"/>
+	        		</div>
+		    		<div style="float:left;margin-top:8px;">
+		    			<button type="submit" class="btn btn-primary" ng-click="saveCollegeStatus()" style="margin-top:-8px;">Update</button>
+	        			<a href="#" ng-click="educationStatusDisableEditor()">Close</a>
+	        		</div>
+	    		</div>
+    		</div> -->
+    		<!-- <div style="height: 35px;padding-bottom:10px;">
+    			<span class="user_credit_union_affi">
+			   		<label class="left_col">Credit Union Affiliation:</label>
+			   		<span style="float:left"  ng-hide="creditUnionAffiEditorEnabled">{{crUnion}}		    
+			   		<a class="creditUnion_affi_edit edit" href="#" ng-click="creditUnionAffiEnableEditor()">Edit</a>
+			   		</span>				   		
+			   	</span>
+			   	<span class="user_credit_union_affi_change" ng-show="creditUnionAffiEditorEnabled" style="display: none"> 
+			    	<select ng-model="selectedcrUnion" ng-options="item as item.name for item in crUnions"></select>
+	        		<button type="submit" class="btn btn-primary" ng-click="saveCreditUnionAffi()" style="margin-top:-10px;">Update</button>
+	        		<a href="#" ng-click="creditUnionAffiDisableEditor()">Close</a>
+	    		</span>
+    		</div> -->
+		</div>
+		<!-- <div class="row_next" style="margin-top:25px;border-bottom: 1px solid #E0E0E0;">
+			<p class="row_title row_padding">
+				<strong>Settings</strong>
+			</p>
+			<div class="settings_links" style="padding: 3px 0;">
+			    <a href="" ng-click="privacy_settings()">Privacy Settings</a>
+			</div>
+			<div class="settings_links" style="padding: 3px 0;">
+			    <a href="" ng-click="email_preferences()">Email Preferences</a>
+			</div>
+		</div> -->
+		<div class="row_next" style="margin-top:25px;">
+			<p class="row_title row_padding">
+				<strong>Social Network Connections</strong>
+			</p>
+			<div class="feed_item">
+				<div class="left_col"><span style="width:16px;height:16px;background-image: url('img/socialIcons/fb-icon.gif');display:block;float:left;margin-right:10px;margin-top:2px;"></span>
+					Facebook
+					<div ng-show ="facebookDisconnectEnable" style="font-size:10px;margin-left:25px;position:relative;top:-5px;">
+						<a href="" ng-click="disconnectToFacebook()" style="color:gray;">Disconnect</a>
+					</div>
+				</div>
+				<input ng-hide = "facebookConnectEnable" class="btn btn-primary btn-txt"  type="button" value="Connect Facebook" ng-click="connectToFacebook()" style="width:150px;" />
+			    <div style="height:35px;" ng-show ="facebookConnectEnable">Connected as:&nbsp;<a target="_blank" href="{{facebookProviderUserProfileUrl}}">{{facebookSocialUserName}}</a></div>
+			</div>
+			<div class="feed_item" style="display:none">
+				<div class="left_col"><span style="width:16px;height:16px;background-image: url('img/socialIcons/in-icon.png');display:block;float:left;margin-right:10px;margin-top:2px;"></span>
+					LinkedIn
+					<div ng-show ="linkedInDisconnectEnable" style="font-size:10px;margin-left:25px;position:relative;top:-5px;">
+						<a href="" ng-click="disconnectToLinkedIn()" style="color:gray;">Disconnect</a>
+					</div>
+				</div>
+				<input ng-hide ="linkedInConnectEnable" class="btn btn-primary btn-txt"  type="button" value="Connect LinkedIn" ng-click="connectToLinkedIn()"  style="width:150px;"/>
+				<div style="height:35px;" ng-show="linkedInConnectEnable">Connected as:&nbsp;<a target="_blank" href="{{linkedInProviderUserProfileUrl}}">{{linkedInSocialUserName}}</a></div>
+		   </div>
+		   <div class="feed_item" style="display:none">
+				<div class="left_col"><span style="width:16px;height:16px;background-image: url('img/socialIcons/google-icon.png');display:block;float:left;margin-right:10px;margin-top:2px;"></span>
+					Google
+					<div ng-show ="googleDisconnectEnable" style="font-size:10px;margin-left:25px;position:relative;top:-5px;">
+						<a href="#" ng-click="disconnectToGoogle()" style="color:gray;">Disconnect</a>
+					</div>
+				</div>
+				<input ng-hide="googleConnectEnable" class="btn btn-primary btn-txt" type="button" value="Connect Google" ng-click="connectToGoogle()" style="width:150px;" />
+				<div style="height:35px;" ng-show="googleConnectEnable">Connected as:&nbsp;<a target="_blank" href="{{googleProviderUserProfileUrl}}">{{googleSocialUserName}}</a></div>
+		  </div>
+		  <div class="feed_item">
+				<div class="left_col"><span style="width:16px;height:16px;background-image: url('img/socialIcons/twr-icon.png');display:block;float:left;margin-right:10px;margin-top:2px;"></span>
+					Twitter
+					<div ng-show ="twitterDisconnectEnable" style="font-size:10px;margin-left:25px;position:relative;top:-5px;">
+						<a href="#" ng-click="disconnectToTwitter()" style="color:gray;">Disconnect</a>
+					</div>
+				</div>
+				<input ng-hide="twitterConnectEnable" class="btn btn-primary btn-txt" type="button" value="Connect Twitter" ng-click="connectToTwitter()" style="width:150px;" />
+				<div style="height:35px;" ng-show="twitterConnectEnable">Connected as:&nbsp;<a target="_blank" href="{{twitterProviderUserProfileUrl}}">{{twitterSocialUserName}}</a></div>
+		  </div>
+		</div>
+   	</div>    
+</div>
+

@@ -1,0 +1,273 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Phroogal | Answers and Access to Financial Knowledge - Q&amp;A on Personal Finance</title>
+	<link href="../css/default.css" rel="stylesheet" media="screen"/>
+	<link type="text/css" rel="stylesheet" href="../css/jquery-te-1.4.0.css"/>
+	<link href="../css/style.css" rel="stylesheet" media="screen"/>    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="http://code.angularjs.org/1.0.7/angular-resource.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.1/lodash.min.js"></script>
+	<script src="../scripts/bootstrap.js" xml:space="preserve"></script>
+	<script src="http://twitter.github.io/typeahead.js/releases/0.9.3/typeahead.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/hogan.js/2.0.0/hogan.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />	
+	<script type="text/javascript" src="../scripts/jquery-te-1.4.0.min.js"></script>	
+	<script src="../scripts/brand_profile_detail.js"></script>
+	<script src="../scripts/phrgl-utils.js"></script>
+	<script src="../scripts/cookie.js"></script>
+	<script type="text/javascript" src="../scripts/modernizr.custom.js"></script>
+    <script type="text/javascript" src="../scripts/classie.js"></script>
+	
+    <style type="text/css">
+	   .brand_profile_page{
+		  	padding-top:5px;
+		  	padding-bottom:50px;
+		  	margin-left:250px;
+		}
+		.top_static_text_content{
+		 margin-left:60px;
+		}
+		.top_static_text_1{
+		  font-weight: bold;	  
+		}
+		.top_static_text_2{
+		  font-size: 13px;
+		}
+		.profile_form_content{
+		  margin-top:25px;
+		}
+		.profile-control-label{
+		  font-weight:bold;
+		  font-size:15px;
+		}
+		.profile-control{
+			padding:2px 5px 2px 25px;
+		}
+		.tt-hint{
+			width:643px!important;
+			/*border-radius:4px 4px 4px 4px;*/
+		}
+		.tt-dropdown-menu{
+		 	min-width:656px!important;
+		}	
+		.ui-autocomplete{
+			 max-height:300px;
+			 overflow-y:auto;
+		}
+		textarea,input[type="text"]{
+	    	border-radius:0px 0px 0px 0px;
+			width:300px;
+		}
+		textarea{
+			resize: none;
+		}
+		.profile-control-footer{
+		  float:left;
+		  margin-left:150px;	  
+		}
+		.profile-control-group{
+		 	padding-top:10px;
+		 	padding-bottom:10px;
+		}
+		.expreince_ratings_content .smily{
+		 	width:30px;
+		 	height:30px;	 	
+		 	border-redius:50%;
+		 	margin-left:-12px;
+		 	font-size:30px;
+		 	cursor: pointer;
+		 	
+		}
+		.expreince_ratings_content .smilyShow{
+		 	width:30px;
+		 	height:30px;	 	
+		 	border-redius:50%;
+		 	margin-left:-12px;
+		 	font-size:30px;	 	
+		 	
+		}
+		.addReviewform_profile-control{
+		   padding:5px 0px 0px 0px; 
+		}
+		.tags_selected{
+	     	border-radius: 3px 3px 3px 3px;
+	     	text-decoration: none;
+	     	display:inline-block;
+	     	padding:5px;
+	     	color:#19558D;
+	     	background-color:#C2D7E7;
+	     	margin-top:3px;
+	     	font-size:12px;
+	 	}
+	     .tags_selected a{
+	   		width:16px;
+	   		display:inline-block;     		
+	   		text-align:center;
+	   		text-decoration:none;
+	   		font-size:12px;
+	   		color:#19558D;
+	     }
+	     .tags_selected a:hover{
+	     	color: #19558D;
+	     }
+	     .question_tags{
+	     	border-radius: 3px 3px 3px 3px;
+	     	text-decoration: none;
+	     	display:inline-block;
+	     	padding: 1px 5px;
+	     	color:#19558D;
+	     	background-color:#C2D7E7;
+	     	text-decoration: none;
+	     	margin-top:3px;
+	     	font-size:12px;
+	     }
+	     
+	     .vote_up_down_content{			    	
+	     	/*position:relative;
+	     	top:80px;
+	     	left:0px;*/
+	     	width:20px;
+	     }
+		.vote_up_content{
+		    border-radius: 3px 3px 3px 3px;
+	     	text-decoration: none;
+	     	display:inline-block;     	
+	     	color:#19558D;
+	     	width:20px;     	 
+		}
+		.vote_up_link_background
+		{
+			width:20px;
+			height:15px;		
+			background-image: url('../img/vote-up-image.gif');
+			cursor:pointer;
+		}
+		.vote_up_link_text{
+		  margin-top:3px;
+		  color:#19558D;
+		  font-weight:bold;
+		  text-align:center;
+		  background-color:#C2D7E7;
+		  border-radius:50%;
+		}
+		.vote_down_link
+		{
+			display: block; 
+			text-align: center; 		
+			text-decoration: none;
+			color:#19558D;
+			margin-top:1px;
+			font-weight:bold;
+			background-image: url('../img/vote-down-image.gif');
+			width:20px;
+			height:15px;
+			cursor:pointer;
+		}
+		form {
+    		margin: 0 0 5px;
+		}
+     
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			
+			expandTextarea("addNewQuestionRightTitle");
+			expandTextarea("addNewQuestionRightDetail");
+			expandTextarea("reviewTitle");
+			expandTextarea("reviewDetail");
+		
+			$("#main_logo_div_container").show();
+			$("#top_header_search_question").show();
+			
+			$("#main_logo_div_container_img").attr("src","../img/logo-full-white.png");
+			$(".seach-icon-logo").css("backgroundImage","url('../img/search_icon.png')");
+			
+			// scrolling pagination for feting questions and barnds
+			$("#main-container-content").scroll(function (){
+				if($(window).scrollTop() + $(window).height() > $(document).height() - 100){
+		    	     if(showQuestionsTab==true){
+		    	    	 if(questionsProcessFlag==false){
+		    	    	 	getNextQuestions();
+		    	    	 }
+		    		 }
+		    	     if(reviewsProcessFlag==false){
+		    	    	 if(showReviewsTab==true){
+		            	 	//GetNextReviews();
+		            	 }
+		    		 }  
+		         }
+			});
+			$('#rightSelectedCategory').keyup(function(e) {
+			    if (e.which === 188) {
+			    	//setRightCategories($('#rightSelectedCategory').val().substr(0,$('#rightSelectedCategory').val().length-1));
+			    	
+			    	var found=checkTagsAvalable($('#rightSelectedCategory').val().substr(0,$('#rightSelectedCategory').val().length-1));
+			    	//alert("found value is"+found);
+			    	if(found>=0){
+			    		setRightCategories(allTagArray[found]);
+			    		$('#rightSelectedCategory').val("");
+			    		$(".right_selected_categories_non_exist_tag_error").hide();
+			    	}
+			    	else{
+			    		$('#rightSelectedCategory').val($('#rightSelectedCategory').val().substr(0,$('#rightSelectedCategory').val().length-1));
+			    		$(".right_selected_categories_non_exist_tag_error").show();
+			    		$(".right_selected_categories_empty_error").hide();
+			    		$(".right_question_tags_category_limit_error_alert").hide();
+			    	}
+			    }			    
+			});			
+		});
+	</script>
+	<script>
+	var allTagArray=[];
+	function allTagsToFilter(tags){	
+		allTagArray=tags;
+		$( "#rightSelectedCategory" ).autocomplete({
+			autoFocus: true,
+			source: function( request, response ) {
+			var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+			response( $.grep( tags, function( item ){
+				return matcher.test( item );
+			}) );
+			},
+			select: function( event, ui ) {			
+				setRightCategories(ui.item.value);
+				$(".right_selected_categories_non_exist_tag_error").hide();
+				return false;
+			}
+		});	
+	}
+	</script>	
+	<script>
+		function expandTextarea(id) {
+			var element = $('#'+id).get(0);	    
+		    element.addEventListener('keyup', function() {
+		    this.style.overflow = 'hidden';
+		    this.style.height = 0;
+		    this.style.height = this.scrollHeight + 'px';
+		 	},false);
+		 }
+	</script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-34381556-1', 'phroogal.com');
+	  ga('send', 'pageview');
+	</script>			
+</head>
+<body class="cbp-spmenu-push">
+   <div th:include="headerProfileTemplate"></div>
+   <span  sec:authentication="principal.profile.email" id="login_user_email" style="display:none"></span>
+   <span  sec:authentication="principal.id" id="login_user_id" style="display:none"></span>
+ 	<div class="container main-container" id="main-container-content" style="margin-top:43px;">
+		<div th:include="BrandDetailPageTemplate"></div>
+	</div>
+	<div th:include="footerTemplate"></div>	
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="modal hide add-image model-upload-image" id="addImageModal">
+	<div class="modal-header" style="background-color: #FFA824;border-color:#DD8602;border-radius:6px 6px 0 0;">
+		<button type="button" class="close" data-target="#addImageModal" data-dismiss="modal" id="add_image_close">x</button>
+		<h5 style="color:white;text-align:center;line-height:10px;">Add Photo</h5>
+	</div>		
+	<div class="modal-body">
+	    <div id="upload_image_message" class="alert alert-error" style="display:none;text-align: center;"></div>
+		<form name="imageUploadForm">
+	        <div>
+	            <label for="inputImage">PHOTO</label>
+	            <input id="inputImage" type="file" accept="image/*" image="image"  onchange="angular.element(this).scope().setFile(this)"/>
+	            <img  ng-src="{{image.url}}" type="{{image.file.type}}"/>
+	            <button class="btn btn-primary"  ng-disabled="imageUploadForm.$invalid"  ng-click="uploadImage(image)" >Upload</button>
+	        </div>
+	    </form>
+	</div>
+</div>

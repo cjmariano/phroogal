@@ -1,0 +1,33 @@
+<div class="question-detail-right-content_add_new_question_box" style="padding:5px;padding-top:0px;">
+	<div class="controls" style="margin-bottom:5px;color:#003366;font-size:14.5pt;font-weight:bold;">
+             Have a money-related question?
+ 			</div>
+ 			<div>Get answers from money-savvy friends and experts.</div>
+ 			<span sec:authorize="! isAuthenticated()">
+			Please
+			<b><a id="login-signup-form_link" data-toggle="modal" href="#signupFormModal" onclick="resetSignUpForm()">JOIN</a>&nbsp;|&nbsp;<a data-toggle="modal" href="#loginSignupFormModal" onclick="resetSignUpForm()">LOGIN</a></b> 
+		to add your question. <br/>Yes! it's free
+		</span>
+ 			<form class="form_add_new_question" name="addNewQuestionRight">
+		<div class="controls">
+	    	<textarea  id="rightAddNewQuestionTitle" style="width:270px;height:20px;font-size:14px;" placeholder="Enter your question here."  ng-model="rightNewQuestionTitle" required="required" maxlength="150" onblur="toUpperIWord(this);"></textarea>
+  			</div>	   							
+  			<div class="controls">
+  				<textarea   id="addNewQuestionRightDetail" style="width:270px;height:20px;font-size:14px;"  placeholder="Add details for more specific answers" ng-model="rightNewQuestionDescription"></textarea>
+    	    </div>
+    	 </form>
+   		<div class="controls">
+   		    <div class="right_selected_categories" style="padding-top:2px;padding-bottom:12px;display:none;"></div>
+   	        <div class="tags_alert_message" id="question_tags_alert_message" style="padding:2px;display:none;color:red"></div>
+   	        <input type="text"  id="rightSelectedCategory" style="width:270px"  placeholder="Add tags. Max 5 tags. Use enter or comma key" auto-complete="" ui-items="categoryNames" ng-model="categorySelected"/>
+   	</div>
+   	<div class="controls">
+ 		<div style="float:left;padding-top:15px;padding-bottom:10px;font-size:12px;">
+ 			<input id="postAsAnonymousRight" type="checkbox" checked="checked" style="margin-right:7px;margin-top:-3px;display:none;"/>Posts Anonymously
+ 		</div> 
+        <div style="float:right;padding-top:10px;padding-bottom:10px;margin-right:5px;">
+        	<button type="button" id="right_add_new_question_button" class="btn btn-warning pull-right" ng-click="addNewRightQuestionButton()" ng-disabled="addNewQuestionRight.$invalid" style="width: 138px;height: 30px;">Add Question</button>
+        </div>
+   	</div>
+</div>
+	  		

@@ -1,0 +1,13 @@
+User-agent: *
+Sitemap: http://www.phroogal.com/sitemap.xml
+Disallow: /bootstrap/
+Disallow: /css/
+Disallow: /img/
+Disallow: /less/
+Disallow: /scripts/
+Disallow: /templates/
+Disallow: /profile/
+Disallow: /showme
+Disallow: /admin
+Disallow: /question/tag/
+Disallow: /api/

@@ -1,0 +1,31 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Phroogal - Q&amp;A on Personal Finance</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>	
+	<script>
+		$(document).ready(function () {	
+			window.location.href = fnGetBaseURL();				
+		});
+		function fnGetBaseURL() {
+			var strUrl = location.href;
+			var strBaseURL = strUrl.substring(0, strUrl.indexOf('/', 14));
+			if (strBaseURL.indexOf('http://localhost') != -1) {
+				var strUrl = location.href; // window.location.href;
+				var strPathName = location.pathname; // window.location.pathname;
+				var intIndex1 = strUrl.indexOf(strPathName);
+				var intIndex2 = strUrl.indexOf("/",intIndex1 + 1);
+				var strBaseLocalUrl = strUrl.substr(0, intIndex2);
+				return strBaseLocalUrl + "/";
+			}
+			else {
+				return strBaseURL + "/";
+			}
+		}
+	</script>	
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<div class="search-home-middle-content_add_new_question_box" style="margin-bottom:50px;">
+	<div class="left-conrols" style="width:415px;color:black;margin-left:90px;" >
+    <form class="form_add_new_question" name="addNewQuestionMiddle">
+		<div class="controls" style="font-size:12px;width:415px;">
+  				<textarea style="height:20px;font-size:14px;width:400px;" id="middelAddNewQuestionTitle"  placeholder="Enter your question here"   ng-model="middleNewQuestionTitle" required="required"  maxlength="150" onblur="toUpperIWord(this);"></textarea>
+					</div>	   							
+					<div class="controls" style="margin-top:5px;font-size:12px;width:415px;">
+					    <div class="middle_selected_detail_empty_error" style="padding:2px;display:none;color:red">Detail can't be empty.</div>
+						<textarea   class="TEeditor" id="middleDetailsContent" placeholder="Add details for more specific answers" ng-model="middleNewQuestionDescription" style="height:50px;" onclick="middleDetailsContentClick()" onfocus="middleDetailsContentClick()"  cols="60"></textarea>
+ 	    			</div>
+ 	    		</form>
+  	    		<div class="controls" style="width:450px;margin-top:5px;padding-bottom:10px;">
+  					<div class="middle_selected_categories" style="padding-top:2px;padding-bottom:10px;display:none;"></div>
+ 				     	<div class="tags_alert_message_miidle" id="question_tags_alert_message_middle" style="padding:2px;display:none;color:red"></div>
+    				    <input id="midSearchCategory" type="text" placeholder="Add tags. Max 5 tags. Use enter or comma key" auto-complete="" ui-items="categoryNames" ng-model="middleCategorySelected" style="width:400px;"/>
+  					</div>
+ 					<div class="controls">
+						<input id="postAsAnonymousMiddle" type="checkbox" checked="checked" style="margin-right:7px;margin-top:-3px;display:none;"/>Posts Anonymously
+ 	    				<button type="button" id="center_add_new_question_button" class="btn btn-warning pull-right" ng-click="addNewMiddleQuestionButton()" ng-disabled="addNewQuestionMiddle.$invalid" style="margin-left:20px;width: 138px;height: 30px;">Add Question</button>
+    				</div>
+   	</div>		     					
+</div>

@@ -1,0 +1,114 @@
+
+<div class="search-home-page" id="search_home_container">
+	<div class="search-home-content" style="margin-left:25px;margin-right:25px;font-size:12px;margin-top:30px;padding-bottom:50px;width:1250px;">
+		<div  class="search-home-left-content_links" style="width:width:200px;float:left;margin-right:25px;">
+			<div class="search-home-left-content" style="border: 1px solid #EEEEEE;">
+				<ul class="catogory_links" style="list-style: none;color:gray;margin:0;">	        		
+	        	</ul>
+        	</div>
+            <div class="show_all_catogory" style="margin-top:10px;display:none;">
+            	<a href="javascript:showAllCategories()" style="text-decoration:none;height:25px;width:200px;text-align: left;color:#FFA824;">View All Categories</a> 
+            </div>
+		</div>
+		<div class="search-home-middle-content" style="border: 1px solid #EEEEEE;width:650px;float:left;margin-right:25px;font-size:12px;margin-bottom:50px;">
+			<ul class="catogry_text" style="list-style: none;color:gray;margin:15px;">            	
+            	<li class="question_answers_searchCategory" style="padding-bottom:5px;margin-top:10px;display:none;"></li>
+             	<li class="question_answers_searchCategory_add_new_question" style="margin-top:10px;display:none;color:black;font-weight:bold;padding:10px;font-size:14px;">
+             		<div style="float:right;color:#003366;cursor: pointer;" onclick="setFocusOnAddNewQuestionRight()">Add Your Question</div>     
+             	</li>
+              	<li class="add_new_question_answer_catogry_text_list" style="padding-bottom:5px;margin-top:10px;display:none;">	
+	        		<div class="add_new_question_answer_catogry_text">
+		        		<div class="question_answer_catogry_text">
+		        			<span style="font-size:14.5pt;font-weight:bold;color:#003366">
+								Questions&nbsp;&amp;&nbsp;Answers								
+							</span>
+							<div class="seprator" style="background-color:#EEEEEE;width:100%;height:2px;margin-top:5px;margin-bottom: 5px;"></div>
+						</div>
+						<div class="add_new_question" style="display:none;">
+							<div class="middle_add_new_question_link_show" style="margin-bottom:5px;margin-top:5px;">
+								<div class="add_new_question_text" style="color:black;font-size:14px;padding:3px;font-weight: bold;margin-left:90px;">
+									Aw! We don't have your question. Why not add it?
+								</div>
+					        </div>
+					        <div th:include="CenterQuestionTemplate"></div>
+		  				</div>
+	  				</div>	  	
+	        	</li>
+        		<li class="ratings_review_searchCategory" style="padding-top:5px;padding-bottom:5px;margin-top:10px;clear:both;">
+        	    </li>
+	        	<li class="reviewed_websites_searchCategory" style="padding-top:5px;padding-bottom:5px;margin-top:10px;clear:both;">
+	        	</li>
+            </ul>
+        </div>
+        <div class="show_all_question_search" style="border: 1px solid #EEEEEE;width:650px;float:left;margin-right:25px;font-size:12px;display:none;margin-bottom:25px;padding-bottom:25px;">
+        	<div class="search-home-middle-content_by_category_div">
+        		<div class="search-home-middle-content_by_category" id="showing-all-search-questions" style="padding:0px 10px 0px 10px;"></div>
+        		<div class="question_answers_searchCategory_add_new_question" style="color:black;font-weight:bold;padding:20px;font-size:14px;">
+        			<div style="float:right;color:#003366;cursor: pointer;" onclick="setFocusOnAddNewQuestionRight()">Add Your Question</div>
+        		</div>
+			</div>
+			<div class="search-home-middle-content_externle_websites" style="padding:15px 0 0px 25px;">
+			</div>
+			<div class="search-home-middle-content_review_ratings_div">
+				<div class="search-home-middle-content_review_ratings" style="padding:5px 0 0px 20px;"></div>
+				<div style="color:black;font-weight:bold;padding:20px;font-size:14px;">
+        			<div style="float:right;color:#003366;cursor: pointer;" onclick="addNewReviewToBrand()">Add a Resource</div>
+        		</div>			
+			</div>
+			<div id="page_loader_image" style="background-image:url('img/loader.gif');width:16px;height:16px;"></div>			
+		</div>
+		<div class="search-home-right-content" style="width:300px;float:left;">
+			<div class="search-home-right-content_add_new_question_box" style="padding:1px 10px 10px 10px;display:none;">
+				<div class="controls" style="margin-bottom:5px;color:#003366;font-size:14.5pt;font-weight:bold;">
+             		Have a money-related question?
+ 				</div>
+ 				<div>Get answers from money-savvy friends and experts.</div>
+ 				<span sec:authorize="! isAuthenticated()">
+					Please
+				<b><a id="login-signup-form_link" data-toggle="modal" href="#signupFormModal" onclick="resetSignUpForm()">JOIN</a>&nbsp;|&nbsp;<a data-toggle="modal" href="#loginSignupFormModal" onclick="resetSignUpForm()">LOGIN</a></b> 
+					to add your question. <br/>Yes! it's free
+				</span>
+	   			<form class="form_add_new_question" name="addNewQuestionRight">
+					<div class="controls">
+				    	<textarea style="width:265px;height:20px;font-size:14px;" placeholder="Enter Question"  id="rightAddNewQuestionTitle" ng-model="rightNewQuestionTitle" required="required"  maxlength="150" onblur="toUpperIWord(this);"></textarea>
+		   			</div>	   							
+		   			<div class="controls">
+		   				<textarea style="width:265px;height:20px;font-size:14px;" type="text"  placeholder="Add details for more specific answers"  id="rightAddNewQuestionContent" ng-model="rightNewQuestionDescription"></textarea>
+		     	    </div>
+		     	</form>
+	     		<div class="controls">
+	     			<div class="right_selected_categories" style="padding-top:2px;padding-bottom:12px;display:none;"></div>
+	     			<div class="tags_alert_message" id="question_tags_alert_message" style="padding:2px;display:none;color:red"></div>
+	         	    <input type="text" style="width:265px" placeholder="Add at least one tag, max 5 tags" auto-complete="" ui-items="categoryNames" ng-model="rightCategorySelected" id="rightSelectedCategory"/>
+		     	</div>
+		     	<div class="controls">
+	   				<div style="float:left;padding-top:15px;padding-bottom:10px;">
+	   					<input id="postAsAnonymousRight" type="checkbox" style="margin-right:7px;margin-top:-3px;display:none" checked="checked"/>Posts Anonymously</div> 
+	     	        <div style="float:right;padding-top:10px;padding-bottom:10px;">
+	     	        	<button type="button" id="right_add_new_question_button" class="btn btn-warning pull-right" ng-click="addNewRightQuestionButton()" ng-disabled="addNewQuestionRight.$invalid" style="width: 128px;height: 30px;">Add Question</button>
+	     	        </div>
+	     	    </div>  				    
+	  		</div>
+	  		<!--<div th:include="RightQuestionTemplate"></div>-->
+	  		<div class="seprator question-detail-right-content_related_question_box_seprator" style="display:none;background-color: #E0E0E0;height:1px;width:300px;clear:both;"></div>
+	  		<div class="question-detail-right-content_related_question_box" style="padding:5px;display:none;">
+	  			<div class="controls" style="margin-top:15px;color:#003366;font-size:14.5pt;font-weight:bold;">
+                	Related Questions
+	   			</div>
+	   			<div class="related_questions_content_links" style="padding-top:10px;color:#003366;"></div>
+	   			<div id="more_related_questions" style="font-weight:bold;font-size:14px;color:#003366;cursor: pointer;display:none;" ng-click="showAllRelatedQuestions()">More Related Questions</div>
+			</div>
+	   		<div class="question-detail-right-content_trending_question_box" style="padding:5px;clear:both;">
+	   			<div class="trending_questions"> 
+	   			    <div class="controls_label" style="margin-top:15px;color:#003366;font-size:14.5pt;font-weight:bold;">Trending Questions</div>
+	   				<div class="trending_questions_content_links" style="padding-top:10px;color:#003366;font-size:10;"></div>
+	   				<div id="more_trending_questions" style="font-weight:bold;font-size:14px;color:#003366;cursor: pointer;display:none;" ng-click="showAllTrendingQuestions()">More Trending Questions</div>
+		        </div>
+			</div>
+		</div>
+	</div>
+	<iframe id="search_link_frame" src=""  frameborder="0"  style="display:block;">  		
+	<p>Your browser does not support iframes.</p>
+	</iframe>
+	<div id="dummyQuestionContentText" style="display:none;"></div>	
+</div>
