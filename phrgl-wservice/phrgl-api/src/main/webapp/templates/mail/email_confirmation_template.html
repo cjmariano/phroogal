@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:remove="all">Email Confirmation</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p>Hi <span th:text="${firstname}"/>,</p>
+        <p>We're excited to have you join us in our mission of helping people live life richer.</p>
+        <p>Just one more step to finish the signup process. Please confirm your email address by clicking <a th:href="${emailconfirmationLink}">here</a>.</p>
+        <p>You'll be redirected to Phroogal where you can start searching for answers, adding your questions and helping others find solutions.</p>
+        <p><i>With smiles,</i></p>
+        <p><i>The Phroogal Team</i></p>
+    </body>
+</html> 

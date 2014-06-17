@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xmlns:solr="http://www.springframework.org/schema/data/solr"
+  xsi:schemaLocation="http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr-1.0.xsd
+  	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <solr:repositories base-package="com.phroogal.core.repository.index" />
+  <solr:solr-server id="solrServer" url="${solr.server.url}" timeout="9000000"/>
+
+  <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
+    <constructor-arg ref="solrServer" />
+  </bean>
+  
+  <bean class="com.phroogal.core.search.index.SearchIndexRegistry">
+  	<property name="indexRepositoryMap">
+  		<util:map key-type="java.lang.Class">
+   		 <entry key="com.phroogal.core.search.index.QuestionIndex" value-ref="questionIndexRepository"/>
+		</util:map>
+  	</property>
+  </bean>
+
+</beans>

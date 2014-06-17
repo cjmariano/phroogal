@@ -1,0 +1,85 @@
+	<div class="modal hide signup-form" id="signupFormModal" style="width:360px!important;color:gray;left:55%!important;top:5%!important;">
+		<div id="facebook_popup_signup" class="social_tooltip_popup" style="top:112px;left:200px;">We don't like wall post SPAM so <br/>don't expect any from us.</div>
+		<div id="twitter_popup_signup" class="social_tooltip_popup" style="top:155px;left:200px;">We don't like wall post SPAM so <br/>don't expect any from us.</div>
+		<div class="modal-header"  style="padding:20px;">
+			<button type="button" class="close" data-target="#signupFormModal" data-dismiss="modal">x</button>
+			<div style="color:white;text-align:center;line-height:22px;font-size:19px">Join Now</div>
+		</div>		
+		<div class="modal-body" style="max-height:500px;!important">
+		    <div id="info_message_sign_form_alert_show">
+		    	<div style="padding-bottom:10px;">
+		    		<div id="signup_message" class="alert alert-error" style="display:none;text-align:center;margin-bottom:0px;"></div>
+		    		<div id="join-to-access-message" style="color:black;font-size:16px;text-align:center;display:none;">Get more out of Phroogal.<br/>Join to access all features.</div>
+		    	</div>
+		    </div>
+		    <div class="modal-body-row">
+				<div class="modal-body-row" align="center">
+					<div id="facebook_signup" class="div_btn btn-social_icon_facebook social_button_login" ng-click="loginFacebook()" style="width:163px;"></div>
+	      			<div id="twitter_signup" class="div_btn btn-social_icon_twitter social_button_login" ng-click="loginTwitter()" style="width:163px;margin-top:10px;"></div>
+				</div>
+				<div class="modal-body-row" style="color:gray;margin: 10px 22px;font-size:14px;">Logging in with a social network allows<br/>for a more social experience.</div>
+				<div class="modal-body-row" style="background-color:#eeeeee;height:2px;width:100%;margin-top:25px"></div>
+				<div class="modal-body-row" style="border-radius: 50% 50% 50% 50%;font-size: 13px;padding: 3px;background-color: rgb(238, 238, 238);margin-top:-13px;margin-left:auto;margin-right:auto;width:20px;">OR</div>
+			</div>
+			<form class="form-horizontal" accept-charset="UTF-8" name="signupform" style="padding:0px 10px 0px 10px">
+			    <div class="sign-form-control-group">
+			 		<div class="control-group-left" style="float:left;">
+			 			<div class="control-group-label">
+			 				First Name
+			 			</div>
+			 			<div class="control-group-input">
+							<input type="text" id="inputFirstName" ng-model="sFirstName" required="required" style="width:100px"/>
+						</div>
+			 		</div>
+			 		<div class="control-group-right" style="float:right;margin-right:7px;">
+			 			<div class="control-group-label">
+			 				Last Name
+			 			</div>
+			 			<div class="control-group-input">
+							<input type="text" id="inputLastName" ng-model="sLastName" required="required" style="width:100px"/>
+						</div>
+					</div>
+			 	</div>
+			 	<div class="sign-form-control-group" style="clear:both;padding-top:5px;">
+			 		<div class="control-group-label">
+			 			Email
+			 			<span id="email-notvalid-span" class="sError" ng-show="signupform.sEmail.$error.email">Not Valid</span>
+						<span class="sError" ng-show="uniqueEmailError">Email Exists</span>
+					</div>
+			 		<div class="control-group-input">
+						<input type="email" id="inputEmail" ng-model="sEmail" name="sEmail" required="required" ng-change="userExistCheck()" style="width:289px"/>
+					</div>
+			 	</div>
+			 	<div class="sign-form-control-group" style="clear:both;padding-top:5px;">
+			 		<div class="control-group-label">
+			 			Password
+			 		</div>
+			 		<div class="control-group-input">
+						<input type="password" id="inputPassword" ng-model="sPassword"  required="required" style="width:289px"/>
+					</div>
+			 	</div>
+			 	<div class="sign-form-control-group" style="clear:both;padding-top:5px;">
+			 		<div class="control-group-label">
+			 			Confirm Password
+			 			<span id="password-match-span" class="sError" ng-show="signupform.confirm_password.$error.passwordVerify">Not Matched</span>				
+			 		</div>
+			 		<div class="control-group-input">
+						<input type="password" id="inputPasswordConfirm" name="confirm_password" ng-model="sConfirmPassword" required="required" data-password-verify="sPassword" style="width:289px"/>
+					</div>
+			 	</div>
+			 	<div class="sign-form-control-group" style="clear:both;padding-top:5px;font-size:11px;">
+					<div class="control-group-input">
+						<input id="agree_terms_condition" type="checkbox" style="margin-top:0!important;margin-right:5px;"/>
+						<a href="javascript:sendRedirect('login_terms')" style="color:gray;">I agree to the terms of service and privacy policy.</a>
+					</div>						
+				</div>	
+			</form>
+			<div class="modal-body-row" style="background-color:#eeeeee;height:2px;width:100%"></div>
+			<div style="float:left;margin-top:15px;">
+				<a data-toggle="modal" href="#loginSignupFormModal" data-dismiss="modal" style="color:gray;">Already a member?</a>
+			</div>
+			<div class="modal-body-row" style="float:right;margin-top:15px">
+				<button class="btn btn-warning pull-right" ng-disabled="signupform.$invalid"  ng-click="signup()">JOIN</button>
+			</div>
+		</div>
+	</div>
