@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:remove="all">Email Confirmation</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p>Hi <span th:text="${firstname}"/>,</p>
+        <p>Thanks for becoming part of the community. You're now a certified phroogie.</p>
+        <p>We're building the largest financial knowledge-base on money. You've taken the first step to contribute to this project. Help us grow the knowledge-base by:</p>
+        <p>
+	        <ul>
+	        	<li><a th:href="${addQuestionLink}">Adding your questions</a> and giving others the opportunity to share their experiences.</li>
+	        	<li>Answer questions and <a th:href="${unansweredQuestionLink}">help others</a>. Let the world know what you know.</li>
+	        	<li>Share Phroogal with your loved ones. The more the merrier.</li>
+	        </ul>
+        </p>
+        <p><a href="mailto:support@phroogal.com">Send us your feedback</a>. It's important we hear what you think so we can improve the experience.</p>
+        <p>With smiles,</p>
+        <p><i>Phroogal Team</i></p>
+        <p><b>Helping you live life richer through access and answers!</b></p>
+    </body>
+</html> 

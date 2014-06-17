@@ -1,0 +1,235 @@
+<html>
+<head>
+<title>Statistics</title>
+<link href="css/default.css" rel="stylesheet" media="screen"/>
+	<link href="css/default.css" rel="stylesheet" media="screen"/>
+	<style>
+		a.anchor{display: block; position: relative; top: -10px; visibility: hidden;}
+		th, td {padding:5px;}
+	</style>
+</head>
+<body>
+
+<!-- =========================================-->
+<!-- Navigation Page -->
+<!-- =========================================-->
+<div class="navbar navbar-fixed-top" style="background-color: orange;" >  
+<table border="1" >
+<thead>
+    <tr style="color: black; font-size: 10pt">
+      <th><a href="#mostViewedQuestions">Most Viewed Questions</a></th>
+      <th><a href="#unansweredQuestions">Unanswered Questions</a></th>
+      <th><a href="#recentQuestions">Recent Questions</a></th>
+      <th><a href="#recentAnswers">Recent Answers</a></th>
+    </tr>
+  </thead>
+</table>
+</div>
+<br/>
+<br/>
+<br/>
+<!-- =========================================-->
+<!-- User Statisitics -->
+<!-- =========================================-->
+<table border="1">
+  <thead>
+    <tr>
+      <th align="left" width="250px">User Statistics</th>
+      <th width="50px">Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>No of Users (Total): <span><th th:text="${userCount}">0</th></span></td>
+    </tr>
+    <tr>  
+      <td>
+      	<select  size='10' style="width: 500px;">
+  			<option th:each="user : ${users}" 
+          		th:value="${user.id}" 
+          		th:text="${user.profile.lastname} + ', '  + ${user.profile.firstname} + '  (' + ${user.primarySocialNetworkConnection} + ' | '  +  ${user.profile.email} +')'">None
+          	</option>
+		</select>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th align="left" width="250px">Questions Statistics</th>
+      <th width="50px">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>No of Questions (Total): <span><th th:text="${questionCount}">0</th></span></td>
+    </tr>
+    <tr>
+      <td>No of Answers (Total): <span><th th:text="${answerCount}">0</th></span></td>
+    </tr>
+    <tr>
+      <td>Answered questions: <span><th th:text="${answeredQuestions}">0</th></span></td>
+    </tr>
+    <tr>
+      <td>Unanswered questions: <span><th th:text="${unansweredQuestionsCount}">0</th></span></td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+
+<!-- =========================================-->
+<!-- Flagged Questions -->
+<!-- =========================================-->
+<a class="anchor" name="flaggedQuestions"/><br/>
+<table border="1">
+  <thead>
+    <tr>
+      <th align="left" width="500px">Flagged Questions</th>
+      <th align="left">Posted by</th>
+      <th align="left">Posted on</th>
+      <th align="left">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="question : ${flaggedQuestions}">
+      <td th:text="${question.title}">None</td>
+      <td th:text="${question.postedByUser}">None</td>
+      <td th:text="${question.postedOn}">None</td>
+      <td><a th:href="${question.link}"> View </a></td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+
+<!-- =========================================-->
+<!-- Flagged Answers -->
+<!-- =========================================-->
+<a class="anchor" name="flaggedAnswers"/><br/>
+<table border="1">
+  <thead>
+    <tr>
+      <th align="left" width="500px">Flagged Answers</th>
+      <th align="left">Posted by</th>
+      <th align="left">Posted on</th>
+      <th align="left">Question Answered</th>
+      <th align="left">Question Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="answer : ${flaggedAnswers}">
+      <td th:utext="${answer.content}">None</td>
+      <td th:text="${answer.postBy} ? ${answer.postBy.profile.firstname} + ' ' + ${answer.postBy.profile.lastname}">None</td>
+      <td th:text="${answer.createdOn}">None</td>
+      <td th:text="${answer.questionTitle}">None</td>
+      <td> <a th:href="${answer.questionLink}"> View </a></td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+
+<!-- =========================================-->
+<!-- Most Viewed Questions -->
+<!-- =========================================-->
+<a class="anchor" name="mostViewedQuestions"/><br/>
+<table border="1">
+  <thead>
+    <tr>
+      <th align="left" width="500px">Most Viewed Questions</th>
+      <th align="left">Views</th>
+      <th align="left">Posted by</th>
+      <th align="left">Posted on</th>
+      <th align="left">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="question : ${mostViewedQuestions}">
+      <td th:text="${question.title}">None</td>
+      <td th:text="${question.totalViewCount}">None</td>
+      <td th:text="${question.postedByUser}">None</td>
+      <td th:text="${question.postedOn}">None</td>
+      <td><a th:href="${question.link}"> View </a></td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+
+<!-- =========================================-->
+<!-- Unanswered Questions -->
+<!-- =========================================-->
+<a class="anchor" name="unansweredQuestions"/><br/>
+<table border="1">
+  <thead>
+    <tr>
+      <th align="left" width="500px">Unanswered Questions: <span th:text="${unansweredQuestionsCount}">0</span></th>
+      <th align="left">Posted by</th>
+      <th align="left">Posted on</th>
+      <th align="left">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="question : ${unansweredQuestions}">
+      <td th:text="${question.title}">None</td>
+      <td th:text="${question.postedByUser}">None</td>
+      <td th:text="${question.postedOn}">None</td>
+      <td><a th:href="${question.link}"> View </a></td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+
+
+<!-- =========================================-->
+<!-- Recent Questions -->
+<!-- =========================================-->
+<a class="anchor" name="recentQuestions"/><br/>
+<table border="1">
+  <thead>
+    <tr>
+      <th align="left" width="500px">Recent Questions: <span th:text="${recentQuestionsCount}">0</span></th>
+      <th align="left">Posted by</th>
+      <th align="left">Posted on</th>
+      <th align="left">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="question : ${recentQuestions}">
+      <td th:text="${question.title}">None</td>
+      <td th:text="${question.postedByUser}">None</td>
+      <td th:text="${question.postedOn}">None</td>
+      <td><a th:href="${question.link}"> View </a></td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+
+<!-- =========================================-->
+<!-- Recent Answers -->
+<!-- =========================================-->
+<a class="anchor" name="recentAnswers"/><br/>
+<table border="1">
+  <thead>
+    <tr>
+      <th align="left" width="500px">Recent Answers for the past week</th>
+      <th align="left">Posted by</th>
+      <th align="left">Posted on</th>
+      <th align="left">Question answered</th>
+      <th align="left">Question Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="answer : ${recentAnswers}">
+      <td th:utext="${answer.content}">None</td>
+      <td th:text="${answer.postBy} ? ${answer.postBy.profile.firstname} + ' ' + ${answer.postBy.profile.lastname}">None</td>
+      <td th:text="${answer.createdOn}">None</td>
+      <td th:text="${answer.questionTitle}">None</td>
+      <td><a th:href="${answer.questionLink}"> View </a></td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+
+</body>
+</html>

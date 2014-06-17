@@ -1,0 +1,158 @@
+<div class="question-detail-home-page" style="margin-left:225px;">
+	<div class="question-detail-home-content" style="margin-left:25px;margin-right:25px;font-size:12px;margin-top:30px;padding-bottom:50px;width:950px;">
+		<div class="question-detail-home-middle-content" style="width:600px;float:left;margin-right:25px;font-size:12px;margin-bottom:50px;display:none;">
+	    	<div class="question-detail-home-middle-content-question">
+	    		<div style="padding-bottom:15px;font-weight:bold;font-size:14.5pt;color:#003366">Questions &amp; Answers </div>
+	 			<div class="seprator" style="background-color: #E0E0E0;height:2px;width:100%;"></div>
+	        </div> 
+	        <div class="question-detail-home-middle-content-question-info" style="color:gray;margin-bottom:10px;">
+	    		<div id="delete_question_link" style="float:right;display:none;margin-left:10px"><a href="#" onclick="deleteQuestionFromDom()">Delete</a></div>
+	    		<div sec:authorize="isAuthenticated()">
+	    			<div id="report_question_flag_link" style="float:right;display:none;margin-left:10px">
+	    				<a data-toggle="modal" href="#reportFlagModal" data-dismiss="modal" style="width:0px;height:0px" data-backdrop="static">Report</a>
+	    			</div>
+	    		</div>
+	    		<div class="question-descriptions" style="margin-top:15px;">
+	    		    <table>
+	 			    	<tr>
+	 			    		<td valign="top">
+				 			    <div class="question-post-by-picture" style="width:40px;float:left;">
+				 				   <img class="question-post-by-picture-img" src="{{postByPicture}}" style="width:30px;height:30px" onerror="this.src='../../img/default-user.png';"/>
+				 			    </div>
+	 			    		</td>
+	 			    		<td> 				
+				 			    <div ng-hide="questionTitleUpdateEnableEditor" class="question-title" style="font-weight:bold;font-size:16px;color:black;" >
+				 			    <H1>
+				 			    	<span style="font-size: 16px;">{{questionTitle}}</span>
+				 			    	<a class="question_title_edit edit" style="display:none;" href="#" onclick="questionTitleUpdateEnableEditor()">Edit</a>
+				 			    </H1>
+				 			    </div>
+				 			    <div class="update_question_title" ng-show="questionTitleUpdateEnableEditor" style="display:none;width:560px;float:left;color:black;">	 			  
+				 			    	<textarea value="{{questionTitle}}" style="width:545px;height:50px;font-size:16px;color:black;font-weight: bold;" ng-model="questionTitle" id="questionTitleEditArea" onblur="toUpperIWord(this);"></textarea>
+						   			<div style='float:right;margin-bottom:10px;'>
+						   			    <a href="#" onclick="questionTitleUpdatenDisableEditor()" style="margin-right:5px;">Close</a>
+						   				<button type="submit" class="btn btn-primary" ng-click="questionTitleUpdate()">Update</button>	        				
+				        			</div>
+				           		</div>
+				        		<div class="question-post-by-content_top" ng-hide="questionContentUpdateEnableEditor" style="color:black;font-size:14px;clear:both;margin-top:5px;">
+				        			<H2>
+				        				<span id="question-content_top_div" class="question_description_container" style="font-size:14px;font-weight: normal;"></span>
+				        				<a class="question_content_edit edit" style="display:none;" href="#" onclick="questionContentUpdateEnableEditor()">Edit</a>
+				        			</H2>
+				        		</div>
+				        		<div class="update_question_content" ng-show="questionContentUpdateEnableEditor" style="display:none;width:565px;">
+				        		    <div class="questionContentEditAreaDiv" id="questionContentEditAreaDiv"> 	 			  
+				 			    		<textarea value="{{questionContent}}"  style="width:100%;height:50px;font-size:14px;" ng-model="questionContent" id="questionContentEditArea"></textarea>
+						   			</div>
+						   			<div style='float:right;margin-bottom:10px;'>
+						   			    <a href="#" onclick="questionContentUpdatenDisableEditor()" style="margin-right:5px;">Close</a>
+						   				<button type="submit" class="btn btn-primary" ng-click="questionContentUpdate()">Update</button>	        				
+				        			</div>
+				           		</div>	        		
+				        		<div style="clear:both;">
+				 					<span class="postby_and_post_time" style="font-size:10px;color:gray;margin-right:15px">
+				 					<span id="loginUserIndicateSpanToggleQuestion" style="display:none;">{{indicatedText}} &nbsp;<a href="#" onclick="changeQuestionAnonymousType('{{questionRefId}}','{{anonymousPostType}}')">{{linkIndicatedTitle}}</a></span><a id="userAnonymousPostName" href="#" style="display:none;">{{postByName}}</a><a id='userPublicPostName' href="#" onclick="javascript:redirectToUserProfilePage('{{userProfileShow}}')">{{postByName}}</a>&nbsp;{{questionPostBio}}{{questionPostLocation}}{{postTime}}</span>
+							        <span  class="question_tags_non_edit" style="text-decoration:none;">
+							        	<span class="question_tags">Tags:&nbsp;</span>
+							        	<span class="question_tags_edit_link"></span>
+							    	</span>
+							   		<span  style="display:none;" class="question_tags_edit_category">
+							   		    <span class="question_tags_edit">Tags:&nbsp;</span>
+							   			 <div class="tags_alert_message_top" id="question_tags_alert_message_top" style="padding:2px;display:none;color:red"></div>
+	     	 				   			 <div style="padding-top:5px;">				   			
+					     	        		<input id="top_question_category_search" type="text" placeholder="Add more tags. (Select or hit Enter key)" auto-complete="" ui-items="categoryNames" ng-model="questionCategorySelected" style="margin-top:0px;border-radius: 0px 0px 0px 0px;width:280px;"/>
+						    				<a href="#" onclick="questionCategoryUpdateDisableEditor()" style="margin-left:2px;">Done</a>
+					    				</div>
+					 		   		</span>
+							   	</div>
+				  			</td>
+				   		</tr>
+				   	</table> 				   				 			
+	 			</div>	 				 			
+	        </div>
+	        <div class="seprator" style="background-color: #E0E0E0;height:2px;width:100%;clear:both;"></div>
+	        <div style="color:black;font-weight:bold;padding:10px;font-size:14px;height:20px;">
+	        	<div style="float:left;"><span id="questionAnswerCount"></span><span>&nbsp;Answers</span></div>
+	        	<div style="float:right;color:#0088cc;cursor: pointer;" onclick="setTeEditorToAddNewAnswer()">Add Your Answer</div>	        	
+	        </div>
+	        <div class="seprator" style="background-color: #E0E0E0;height:2px;width:100%;clear:both;"></div>
+	        <div class="question-detail-home-middle-content-answers-info" style="color:gray;width:600px;">
+	        	<div class="old-answer-descriptions" style="float:left;width:600px;">
+	 			</div>
+	        </div>
+	        <div class="question-reply-answer-new" style="padding-top:15px;clear:both;padding-bottom:15px;">
+	            <!-- <a  id="question-to-new-answer-add" href="javascript:addNewAnswerToQuestionControlsShow()">Add Your Answer</a> -->
+ 				<div class="question-to-new-answer-add-control">
+ 				    <div class="answer-current-post-by-info" style="padding-bottom:10px;">
+	 					<table><tr><td><img src="{{loginUserProfilePicture}}" class="addnewAnswerpostimage" style="height:30px;width:30px;margin-right:10px;"></img></td>&nbsp;
+	 					<td><span class="answer_postby_info">
+	 						<a href="#" onclick="javascript:redirectToUserProfilePage('{{login_user_id}}')">
+	 							<span >{{loginUserFullName}}</span>
+	 						</a>
+	 						<span>{{loginUserBio}}</span>
+	 						<span>{{loginUserLocation}}</span>
+	 						<span>{{loginUserDate}}</span>
+	 					</span></td></tr></table>
+	 					<span sec:authorize="! isAuthenticated()">
+	 						Please
+	 						<b><a id="login-signup-form_link" data-toggle="modal" href="#signupFormModal" onclick="resetSignUpForm()">JOIN</a>&nbsp;|&nbsp;<a data-toggle="modal" href="#loginSignupFormModal" onclick="resetSignUpForm()">LOGIN</a></b>  
+							to add your answer. Yes! it's free
+	 					</span>
+	 				</div>
+ 				    <div class="textformatter-unit iframetrack" id="iframe_blue"> 
+    					<textarea id="addNewAnswerContent"  name="description"  class="editor tinymce addNewAnswerTEeditor" height="100" placeholder="Add your answer" onclick="setTeEditorToAddNewAnswer()" ></textarea>   
+    				</div> 	
+ 				    <div id="addNewAnswerBYLoginUserButton" style="float:right;margin-right:5px;padding-bottom:5px;margin-top:10px;display:none;">			    	
+			    		<button  id="addNewAnswerToQuestionButton" type="button" class="btn btn-primary btn-warning-blue" onclick="addAnswerToQuestionByIdSave()" style="width:135px">Add Answer</button>
+			    		<!-- <a style="margin-left:5px;" href="javascript:addAnswerToQuestionDisableEditor()">Cancel</a> -->
+			    	</div>
+			    </div>
+			 </div>			
+	    </div>
+	    <div class="search_question-bytag_content" style="display:none;float:left;">
+	    	<div class="search_question-bytag_content_tagName" style="color:#003366;font-size:14pt;width:500px;padding-bottom:10px;font-weight:bold;"></div>
+	    	<div class="search_question-bytag_content_questions" style="width:600px;margin-right:25px;margin-bottom:10px;font-size:13px;border: 1px solid #EEEEEE;padding:10px;"></div>
+	       <div id="page_loader_image" style="background-image:url('../../img/loader.gif');width:16px;height:16px;margin-left:290px;display:none;"></div>
+	    </div> 
+	    
+    	<div class="question-detail-home-right-content" style="width:300px;float:left;display:none;">
+			<div th:include="RightQuestionTemplate"></div>
+	  		<div class="seprator question-detail-right-content_related_question_box_seprator" style="background-color: #E0E0E0;height:1px;width:300px;clear:both;"></div>
+	  		<div class="question-detail-right-content_related_question_box" style="padding:5px;display:none;">
+	  			<div class="controls" style="margin-top:15px;color:#003366;font-size:14.5pt;font-weight:bold;">
+                	Related Questions
+	   			</div>
+	   			<div class="related_questions_content_links" style="padding-top:10px;color:#003366;font-size:10;"></div>
+	   			<div id="more_related_questions" style="font-weight:bold;font-size:14px;color:#003366;cursor: pointer;display:none;" ng-click="showAllRelatedQuestions()">More Related Questions</div>
+				   			
+	   		</div>
+	   		<div class="question-detail-right-content_trending_question_box" style="padding:5px;clear:both;">
+	  			<div class="trending_questions"> 
+	   			    <div class="controls_label" style="margin-top:15px;color:#003366;font-size:14.5pt;font-weight:bold;">Trending Questions</div>
+	   				<div class="trending_questions_content_links" style="padding-top:10px;color:#003366;font-size:10;"></div>
+	   				<div id="more_trending_questions" style="font-weight:bold;font-size:14px;color:#003366;cursor: pointer;display:none;" ng-click="showAllTrendingQuestions()">More Trending Questions</div>
+				</div>
+			</div>
+			<div id="trending_tags_box" style="padding:5px;clear:both;display:none;">
+	  			<div class="trending_tags"> 
+	   			    <div class="controls_label" style="margin-top:15px;color:#003366;font-size:14.5pt;font-weight:bold;">Trending Tags</div>
+	   				<div class="trending_tags_content_links" id="trending_tags_content_links" style="padding-top:10px;color:#003366;font-size:10;"></div>
+	   				<div id="test_show_hide" style="min-height:10px;width:100%;clear:both;opacity:0;">Tags</div>
+	   				<div id="more_trending_tags" style="font-weight:bold;font-size:14px;color:#003366;cursor: pointer;display:none;clear:both;" ng-click="showAllTrendingTags()">More Trending Tags</div>
+				</div>
+			</div>
+	  </div>
+	</div>		
+</div>
+<style>
+.btn-warning-blue[disabled]
+{
+	background-color: #E6E6E6!important;
+   	color: #333333!important;
+   	/* background-image: none;*/
+   	box-shadow: none;
+   	cursor: default;
+   	opacity: 1!important;
+   	text-shadow: none!important;	
+}
+</style>

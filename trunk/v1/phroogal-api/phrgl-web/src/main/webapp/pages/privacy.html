@@ -1,0 +1,51 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Privacy &amp; Policy</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/default.css" rel="stylesheet" media="screen"/>
+	<link href="css/style.css" rel="stylesheet" media="screen"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="http://code.angularjs.org/1.0.7/angular-resource.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.1/lodash.min.js"></script>
+	<script src="scripts/bootstrap.js" xml:space="preserve"></script>
+	<script src="http://twitter.github.io/typeahead.js/releases/0.9.3/typeahead.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/hogan.js/2.0.0/hogan.min.js"></script>
+	<script type="text/javascript" src="scripts/login.js"></script>
+	<script src="scripts/phrgl-utils.js"></script>
+    <script type="text/javascript" src="scripts/modernizr.custom.js"></script>
+    <script type="text/javascript" src="scripts/classie.js"></script>
+      
+	<script type="text/javascript">
+		var currentLoginUserObj=null;
+		$(document).ready(function () {
+			$("#main_logo_div_container").show();
+			$("#top_header_search_question").show();
+		});
+		function getBaseUrlOfSite(){
+			var index = BASE_URL.lastIndexOf('/');
+			var url = BASE_URL.substring(0,index + 1);
+			return url;
+		}
+		var BASE_URL = location.protocol + "//" +"" + document.location.host + window.location.pathname;
+	</script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-34381556-1', 'phroogal.com');
+	  ga('send', 'pageview');
+	</script>
+</head>	
+<body ng-app="signin" ng:controller="LoginCtrl" class="cbp-spmenu-push">    
+	<div th:include="headerProfileTemplate"></div>
+	<div class="container main-container" style="margin-top:50px;">
+		<div th:include="privacyPolicyTemplate" style="padding-top:2%;padding-bottom:2%;"></div>
+	</div>
+	<div th:include="footerTemplate"></div>
+</body>
+</html>
