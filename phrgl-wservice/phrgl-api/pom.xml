@@ -9,10 +9,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>phrgl-web</artifactId>
+	<artifactId>phrgl-api</artifactId>
 	<packaging>war</packaging>
 
-	<name>phrgl-web</name>
+	<name>phrgl-api</name>
 	<url>http://maven.apache.org</url>
 
 	<!-- Dependency versions should be declared on the Parent POM -->
@@ -121,7 +121,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>phrgl-web</finalName>
+		<finalName>phrgl-api</finalName>
 
 		<plugins>
 			<plugin>
@@ -147,7 +147,7 @@
 						</goals>
 						<configuration>
 							<files>
-								<file>${user.home}/phrgl-web.properties</file>
+								<file>${user.home}/phrgl-api.properties</file>
 							</files>
 						</configuration>
 					</execution>
@@ -172,7 +172,7 @@
 						<addMavenDescriptor>false</addMavenDescriptor>
 					</archive>
 					<failOnMissingWebXml>true</failOnMissingWebXml>
-					<warName>phrgl-web</warName>
+					<warName>phrgl-api</warName>
 					<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
 				</configuration>
 			</plugin>
