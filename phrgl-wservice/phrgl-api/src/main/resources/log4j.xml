@@ -16,7 +16,7 @@
 		</layout>
 	</appender>
 	<appender name="rolling-file" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="${catalina.home}/logs/phrgl-web.log" />
+		<param name="file" value="${catalina.home}/logs/phrgl-api.log" />
 		<param name="MaxFileSize" value="10MB" />
 		<!-- Keep one backup file -->
 		<param name="MaxBackupIndex" value="4" />
@@ -25,7 +25,7 @@
 		</layout>
 	</appender>
 	<appender name="messaging-log" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="${catalina.home}/logs/phrgl-web-messaging.log" />
+		<param name="file" value="${catalina.home}/logs/phrgl-api-messaging.log" />
 		<param name="MaxFileSize" value="10MB" />
 		<param name="MaxBackupIndex" value="4" />
 		<layout class="org.apache.log4j.PatternLayout">
