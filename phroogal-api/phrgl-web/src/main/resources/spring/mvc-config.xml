@@ -35,67 +35,10 @@
 		<property name="order" value="1" />
 	</bean>
 	
-	<bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-		<property name="prefix" value="/pages/" />
-		<property name="suffix" value=".html" />
-		<property name="templateMode" value="LEGACYHTML5" />
-		<property name="templateAliases" ref="templateAliases" />
-		<property name="order" value="2"/>
-		<!-- Template cache is set to false. Set true on production (default is 
-			true). -->
-		<property name="cacheable" value="false" />
-	</bean>
-
-	<util:map id="templateAliases">
-		<entry key="headerTemplate" value="header"/>
-		<entry key="headerProfileTemplate" value="header-profile"/>
-		<entry key="footerTemplate" value="footer"/>
-		<entry key="signinFooterTemplate" value="signin_footer"/>
-		<entry key="signupFormTemplate" value="signup-form"/>
-		<entry key="loginAndSignupFormTemplate" value="login-signup-form"/>
-		<entry key="messagePageTemplate" value="message_page"/>
-		<entry key="searchBarTemplate" value="search-bar"/>
-		<entry key="profileTemplate" value="profile-info"/>
-		<entry key="dashboardTemplate" value="dashboard-info"/>
-		<entry key="userSettingsTemplate" value="user-settings"/>
-		<entry key="addImageTemplate" value="add-image"/>
-		<entry key="privacyPolicyTemplate" value="privacy_policy"/>
-		<entry key="termsUseTemplate" value="terms_use"/>
-		<entry key="aboutTemplate" value="about_page"/>
-		<entry key="userEmailPreferencesTemplate" value="email_preference"/>
-		<entry key="userPrivacyTemplate" value="user_privacy"/>
-		<entry key="SearchHomeResult" value="search_home_result"/>
-		<entry key="QuestionDetailTemplate" value="question_detail"/>
-		<entry key="SearchCategoryResult" value="search_category_result"/>
-		<entry key="forgotPasswordFormTemplate" value="forgot_password_form"/>
-		<entry key="AddReviewTemplate" value="add_review_detail" />
-		<entry key="BrandDetailPageTemplate" value="brand_profile_detail" />
-		<entry key="scriptLoader" value="script-loader"/>
-		<entry key="googleAnalyticsTemplate" value="google-analytics"/>
-		<entry key="SearchTrendingQuestions" value="search_trending_detail"/>
-		<entry key="SearchUnansweredQuestions" value="search_unanswered_detail"/>
-		<entry key="SearchDiscoverTags" value="discover_tag_result"/>
-		<entry key="PersonalFinanceInfo" value="personal_finance_info"/>
-		<entry key="SearchSocialQuestionTemplate" value="search_social_result"/>
-		<entry key="SearchAddNewQuestionTemplate" value="search_add_question_detail"/>
-		<entry key="FreeAppAndToolInfo" value="free_app_tool_info"/>
-		<entry key="SearchRecentQuestionTemplate" value="search_recent_result"/>
-		<entry key="SearchTrendingTags" value="trending_tags_result"/>
-		<entry key="RightQuestionTemplate" value="right_question_add"/>
-		<entry key="CenterQuestionTemplate" value="center_question_add"/>
-		<entry key="addEmailFormTemplate" value="add_email_form"/>
-		<entry key="reportQuestionFlagTemplate" value="question_flag_report"/>
-		<entry key="reportAnswerFlagTemplate" value="answer_flag_report"/>
-		<entry key="SearchRecentAnswersTemplate" value="search_recent_answers_result"/>
-		<entry key="AdminPageContentTemplate" value="admin_page_info"/>
-		<entry key="GovernmentResourcesInfo" value="government_resources_info"/>
-	</util:map>
-
 	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
 		<property name="templateResolvers">
 	    	<set>
 		      <ref bean="emailTemplateResolver" />
-		      <ref bean="templateResolver" />
 	    	</set>
   		</property> 
 		<property name="additionalDialects">

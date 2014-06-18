@@ -110,7 +110,7 @@ public class AnswerUpdateNotification implements Subscriber<Answer> {
 	private String generateQuestionLink(Question question) {
 		StringBuffer sb = new StringBuffer();
 		sb.append(applicationUrl);
-		sb.append("question/");
+		sb.append("/question/");
 		sb.append(question.getDocId());
 		sb.append("/");
 		sb.append(SlugGenerator.toSlug(question.getTitle()));

@@ -7,28 +7,15 @@
                             http://www.springframework.org/schema/security
                             http://www.springframework.org/schema/security/spring-security.xsd" >
 
-	<http pattern="/scripts/**" security="none"/>
 	<http pattern="/templates/**" security="none"/>
-	<http pattern="/css/**" security="none"/>
-	<http pattern="/img/**" security="none"/>
-	<http pattern="/profile_picture/**" security="none"/>
 	<http use-expressions="true" auto-config="false" access-denied-page="/">
 		<remember-me services-ref="rememberMeServices" />
 		<intercept-url pattern="/" access="isAuthenticated()"/>
-		<intercept-url pattern="/signin" access="permitAll"/>
-		<intercept-url pattern="/dashboard/**" access="isAuthenticated()"/>
-		<intercept-url pattern="/profile/**" access="isAuthenticated()"/>
-		<intercept-url pattern="/settings/**" access="isAuthenticated()"/>
-		<intercept-url pattern="/admin" access="hasRole('Admin')"/>
-		<intercept-url pattern="/showme" access="hasRole('Admin')"/>
-		<intercept-url pattern="/sitemap.xml" access="permitAll"/>
-		<intercept-url pattern="/robots.txt" access="permitAll"/>
-		<intercept-url pattern="/favicon.ico" access="permitAll"/>
 		<session-management session-fixation-protection="migrateSession" />
 		
-		<form-login login-page="/signin"
-            default-target-url="/search"
-            authentication-failure-url="/signin"
+		<form-login login-page="${page.url.login}"
+            default-target-url="${page.url.home}"
+            authentication-failure-url="${page.url.login}"
             always-use-default-target="true"
 	    />
 	    <custom-filter position="LOGOUT_FILTER" ref="logoutFilter" />
