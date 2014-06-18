@@ -176,44 +176,6 @@
 					<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
 				</configuration>
 			</plugin>
-			<!--start of minification plugin -->
-			<plugin>
-			    <groupId>com.samaxes.maven</groupId>
-			    <artifactId>minify-maven-plugin</artifactId>
-			    <version>1.6.2</version>
-			    <executions>
-			        <execution>
-			            <id>default-minify</id>
-			            <!-- <phase>package</phase> -->
-			            <configuration>
-			               <charset>UTF-8</charset>
-			               <skipMerge>true</skipMerge> <!-- do not create one big file -->
-			               <nosuffix>true</nosuffix> <!-- do not use suffix like 'min' -->
-			               <cssSourceDir>css</cssSourceDir>
-               				<cssSourceIncludes>
-                   				<cssSourceInclude>**/*.css</cssSourceInclude>
-               				</cssSourceIncludes>               				 
-			                <jsSourceDir>scripts</jsSourceDir>
-			               <jsSourceIncludes>
-			                   <jsSourceInclude>**/*.js</jsSourceInclude>
-			               </jsSourceIncludes>
-			              <!--  <jsSourceExcludes>
-                       			<jsSourceExclude>**/*.min.js</jsSourceExclude>
-                       			<jsSourceExclude>**/modernizr.custom.js</jsSourceExclude>
-                       			<jsSourceExclude>**/jquery.fancybox-media.js</jsSourceExclude>
-                       			<jsSourceExclude>**/jquery.fancybox.js</jsSourceExclude>
-                       			<jsSourceExclude>**/jquery.fancybox-pack.js</jsSourceExclude>
-                   			</jsSourceExcludes> -->
-                   			<cssTargetDir>css</cssTargetDir>
-			               <jsTargetDir>scripts</jsTargetDir>
-			           </configuration>
-			           <goals>
-			               <goal>minify</goal>
-			           </goals>
-			       </execution>
-			   </executions>
-			</plugin>
-			<!--end of minification plugin -->
 		</plugins>
 	</build>
 </project>
