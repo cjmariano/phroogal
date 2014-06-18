@@ -82,39 +82,6 @@
         <session-timeout>720</session-timeout>
     </session-config>
 
-	<!-- Default mapping for css and scripts folders -->
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/css/*</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/scripts/*</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/img/*</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/pages/*</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/favicon.ico</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/robots.txt</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/sitemap.xml</url-pattern>
-	</servlet-mapping>
 	<error-page>
 		<exception-type>org.springframework.security.web.authentication.rememberme.CookieTheftException</exception-type>
 		<location>/</location>

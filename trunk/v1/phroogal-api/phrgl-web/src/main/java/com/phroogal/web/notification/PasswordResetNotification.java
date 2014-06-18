@@ -68,6 +68,7 @@ public class PasswordResetNotification {
 	private String generatePasswordFormat() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(applicationUrl);
+		sb.append("/");
 		sb.append(WebApplicationContext.PAGE_PASSWORD_RESET);
 		sb.append("?rid=%s");
 		return sb.toString();

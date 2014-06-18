@@ -97,6 +97,7 @@ public class FlagNotification {
 	private String getLink(Question question) {
 		StringBuffer sb = new StringBuffer();
 		sb.append(applicationUrl);
+		sb.append("/");
 		sb.append(LinkGenerator.getQuestionLink(question.getDocId() , question.getTitle()));
 		return sb.toString();
 	}

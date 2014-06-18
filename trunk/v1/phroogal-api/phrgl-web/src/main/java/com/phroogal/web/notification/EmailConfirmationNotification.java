@@ -64,6 +64,7 @@ public class EmailConfirmationNotification {
 	private String generateEmailConfirmationFormat() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(applicationUrl);
+		sb.append("/");
 		sb.append(WebApplicationContext.PAGE_EMAIL_CONFIRMATION);
 		sb.append("?rid=%s");
 		return sb.toString();
