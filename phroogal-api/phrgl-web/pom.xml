@@ -112,6 +112,12 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 
+		<!-- Swagger - Rest API documentation -->
+		<dependency>
+			<groupId>com.mangofactory</groupId>
+			<artifactId>swagger-springmvc</artifactId>
+		</dependency>
+
 		<!-- Testing Dependencies -->
 		<dependency>
 			<groupId>junit</groupId>

@@ -81,39 +81,60 @@
 	<session-config>
         <session-timeout>720</session-timeout>
     </session-config>
+    
+    <!-- Default mapping for css and scripts folders -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/css/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/scripts/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/images/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/lib/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/templates/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/pages/*</url-pattern>
+	</servlet-mapping>
 
 	<error-page>
 		<exception-type>org.springframework.security.web.authentication.rememberme.CookieTheftException</exception-type>
-		<location>/</location>
-	</error-page>
-	
-	<error-page>
-		<exception-type>com.phroogal.core.exception.UserEmailNotFoundException</exception-type>
-		<location>/signin</location>
-	</error-page>
-	
-	<error-page>
-		<exception-type>com.phroogal.core.exception.InvalidQuestionDocumentIdException</exception-type>
-		<location>/signin</location>
+		<location>/docs</location>
 	</error-page>
 	
 	<error-page>
 		<exception-type>org.springframework.dao.DataAccessResourceFailureException</exception-type>
-		<location>/signin</location>
+		<location>/docs</location>
 	</error-page>
 	
 	<error-page>
 		<exception-type>org.xml.sax.SAXParseException</exception-type>
-		<location>/signin</location>
+		<location>/docs</location>
 	</error-page>
 	
 	<error-page>
 		<exception-type>org.springframework.web.util.NestedServletException</exception-type>
-		<location>/signin</location>
+		<location>/docs</location>
 	</error-page>
 	
 	<error-page>
     	<error-code>404</error-code>
-     	<location>/signin</location>
+     	<location>/docs</location>
 	</error-page>
 </web-app>
