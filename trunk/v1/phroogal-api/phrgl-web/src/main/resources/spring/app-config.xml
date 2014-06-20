@@ -11,6 +11,7 @@
 	<import resource="classpath:/spring/web-spring-security-config.xml" />
 	<import resource="classpath:/spring/web-social-config.xml" />
 	<import resource="classpath:/spring/web-notification-config.xml" />
+	<import resource="classpath:/spring/web-swagger-config.xml" />
 	
 	<bean id="placeholderConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

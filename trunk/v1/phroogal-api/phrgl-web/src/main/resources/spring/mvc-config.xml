@@ -35,10 +35,21 @@
 		<property name="order" value="1" />
 	</bean>
 	
+	<bean id="htmlTemplateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/pages/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="LEGACYHTML5" />
+		<property name="order" value="2"/>
+		<!-- Template cache is set to false. Set true on production (default is 
+			true). -->
+		<property name="cacheable" value="false" />
+	</bean>
+	
 	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
 		<property name="templateResolvers">
 	    	<set>
 		      <ref bean="emailTemplateResolver" />
+		      <ref bean="htmlTemplateResolver" />
 	    	</set>
   		</property> 
 		<property name="additionalDialects">
