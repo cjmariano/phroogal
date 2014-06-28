@@ -25,8 +25,10 @@ import com.phroogal.core.service.ReplyService;
 import com.phroogal.core.service.Service;
 import com.phroogal.web.bean.ReplyBean;
 import com.phroogal.web.controller.rest.RestPatchRequest;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="reply", description="Reply Operations", position = 9)
 @RequestMapping(URI_REPLY_PREFIX)
 public class ReplyController extends BasicController<Reply, ReplyBean, ObjectId> {
 	

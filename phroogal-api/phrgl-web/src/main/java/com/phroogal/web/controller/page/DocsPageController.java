@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class DocsPageController {
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showLandingPage(Model model, WebRequest request, RedirectAttributes redirectAttributes) {
 		return  "redirect:/docs";

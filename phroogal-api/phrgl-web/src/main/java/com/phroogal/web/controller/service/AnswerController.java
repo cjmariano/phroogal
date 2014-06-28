@@ -34,8 +34,10 @@ import com.phroogal.core.service.Service;
 import com.phroogal.web.bean.AnswerBean;
 import com.phroogal.web.controller.rest.RestPatchRequest;
 import com.phroogal.web.notification.FlagNotification;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="answer", description="Answer Operations", position = 7)
 @RequestMapping(URI_ANSWER_PREFIX)
 public class AnswerController extends BasicController<Answer, AnswerBean, ObjectId> {
 	

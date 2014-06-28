@@ -26,9 +26,10 @@ import com.phroogal.core.service.CommentService;
 import com.phroogal.core.service.Service;
 import com.phroogal.web.bean.CommentBean;
 import com.phroogal.web.controller.rest.RestPatchRequest;
-
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="comment", description="Comment Operations", position = 8)
 @RequestMapping(URI_COMMENT_PREFIX)
 public class CommentController extends BasicController<Comment, CommentBean, ObjectId> {
 	

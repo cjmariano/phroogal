@@ -26,8 +26,10 @@ import com.phroogal.web.bean.PasswordResetRequestBean;
 import com.phroogal.web.bean.UserCredentialsBean;
 import com.phroogal.web.notification.PasswordResetCompleteNotification;
 import com.phroogal.web.notification.PasswordResetNotification;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="password reset", description="Password Reset Operations", position = 4)
 public class PasswordResetController extends BasicController<PasswordResetRequest, PasswordResetRequestBean, ObjectId> {
 	
 	@Autowired

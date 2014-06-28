@@ -24,8 +24,10 @@ import com.phroogal.core.domain.Tag;
 import com.phroogal.core.service.Service;
 import com.phroogal.core.service.TagService;
 import com.phroogal.web.bean.TagBean;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="tag", description="Tag Operations", position = 13)
 public class TagController extends BasicController<Tag, TagBean, ObjectId> {
 
 	@Autowired

@@ -19,9 +19,10 @@ import com.phroogal.core.service.LocationService;
 import com.phroogal.core.utility.CollectionUtil;
 import com.phroogal.web.bean.LocationIndexBean;
 import com.phroogal.web.bean.mapper.MapperService;
-
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="location", description="Location Operations", position = 10)
 public class LocationController  {
 	
 	@Autowired

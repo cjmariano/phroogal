@@ -22,8 +22,10 @@ import com.phroogal.core.domain.CreditUnion;
 import com.phroogal.core.service.CreditUnionService;
 import com.phroogal.core.service.Service;
 import com.phroogal.web.bean.CreditUnionBean;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="credit union", description="Credit Union Operations", position = 12)
 @RequestMapping(URI_CREDIT_UNION_PREFIX)
 public class CreditUnionListController extends BasicController<CreditUnion, CreditUnionBean, ObjectId> {
 

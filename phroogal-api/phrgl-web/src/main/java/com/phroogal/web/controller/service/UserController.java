@@ -39,8 +39,10 @@ import com.phroogal.web.bean.LocationBean;
 import com.phroogal.web.bean.PasswordChangeBean;
 import com.phroogal.web.bean.UserBean;
 import com.phroogal.web.controller.rest.RestPatchRequest;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="user", description="User Operations", position = 5)
 public class UserController extends BasicController<User, UserBean, ObjectId> {
 	
 	@Autowired
