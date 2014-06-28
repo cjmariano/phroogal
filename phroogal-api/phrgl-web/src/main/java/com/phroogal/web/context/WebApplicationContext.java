@@ -92,21 +92,4 @@ public final class WebApplicationContext {
 	public static final String URI_USER_TAG_POST="api/tags/user-{id}";
 	public static final String URI_USER_TAG_DELETE="api/tags/user/tag-{id}";
 	
-	public static final String URI_BRAND_PREFIX = "api/posts/*";
-	public static final String URI_BRAND_POST = "/brand";
-	public static final String URI_BRAND_GET = "/brand-{id}";
-	public static final String URI_BRAND_NAME_SEARCH = URI_BRAND_POST;
-	public static final String URI_BRAND_URL_SEARCH = URI_BRAND_POST;
-	public static final String URI_BRAND_UPLOAD_PICTURE_POST ="/brand-{id}/profile-picture";
-	public static final String URI_BRAND_SEARCH = "/brands/query";
-	
-	
-	public static final String URI_REVIEW_PREFIX = "api/posts/*";
-	public static final String URI_REVIEW_POST = "/review";
-	public static final String URI_REVIEW_GET = "/review-{id}";	
-	public static final String URI_REVIEW_BY_BRAND_GET = "/reviews/brand-{id}";
-	public static final String URI_REVIEW_PARTIAL_POST = URI_REVIEW_GET;
-	public static final String URI_REVIEW_GET_ALL = "/reviews";
-	public static final String URI_REVIEW_VOTE_POST = "/review-{id}/rating";	
-	
 }
