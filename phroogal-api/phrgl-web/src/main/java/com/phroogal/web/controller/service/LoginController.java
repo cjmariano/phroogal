@@ -83,24 +83,7 @@ public class LoginController {
 			throw uenfe;
 		}
 	}
-	
-	@RequestMapping(value = URI_LOGIN, method = RequestMethod.POST, params="_spring_security_remember_me")
-	@Deprecated //Should use the method with redirect parameter
-	public @ResponseBody
-	Object loginDeprecated(HttpServletRequest request, HttpServletResponse response, @RequestBody UserCredentialsBean userCredentialsBean) throws Throwable {
-		try {
-			UserCredentials userCredentials = userCredentialsMapper.toDomain(userCredentialsBean, UserCredentials.class);
-			User user = validationService.validateCredentials(userCredentials);
-			user.setLastLoginOn(DateTime.now());
-			userService.saveOrUpdate(user);
-			return userMapper.toBean(user, UserBean.class);
-		} catch (UserEmailNotFoundException uenfe) {
-			handleUsernameNotFoundException(userCredentialsBean.getUsername());
-			throw uenfe;
-		}
-	}
 
-	@ApiIgnore
 	@RequestMapping(value = URI_LOGIN_PROVIDER, method = RequestMethod.POST)
 	public @ResponseBody
 	Object loginProvider(@PathVariable String providerId, @RequestParam("redirect") String redirect, NativeWebRequest request, HttpServletResponse response) {
