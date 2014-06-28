@@ -25,8 +25,10 @@ import com.phroogal.core.domain.UserTag;
 import com.phroogal.core.service.Service;
 import com.phroogal.core.service.UserTagService;
 import com.phroogal.web.bean.UserTagBean;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="user tag", description="User Tag Operations", position = 14)
 public class UserTagController extends BasicController<UserTag, UserTagBean, ObjectId> {
 
 	@Autowired

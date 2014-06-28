@@ -26,8 +26,10 @@ import com.phroogal.core.service.Service;
 import com.phroogal.core.utility.CollectionUtil;
 import com.phroogal.web.bean.CollegeBean;
 import com.phroogal.web.bean.mapper.MapperService;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="college", description="College Operations", position = 11)
 @RequestMapping(URI_COLLEGES_PREFIX)
 public class CollegeController extends BasicController<College, CollegeBean, ObjectId> {
 

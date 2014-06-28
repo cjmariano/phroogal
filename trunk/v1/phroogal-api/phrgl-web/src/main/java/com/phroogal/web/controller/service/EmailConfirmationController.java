@@ -22,8 +22,10 @@ import com.phroogal.core.service.EmailConfirmationService;
 import com.phroogal.core.service.UserService;
 import com.phroogal.web.notification.EmailConfirmationNotification;
 import com.phroogal.web.notification.WelcomeMailNotification;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="email confirmation", description="Email Confirmation Operations", position = 3)
 public class EmailConfirmationController {
 	
 	@Autowired

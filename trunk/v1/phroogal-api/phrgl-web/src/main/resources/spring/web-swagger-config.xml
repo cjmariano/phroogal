@@ -6,6 +6,7 @@
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:property-placeholder location="classpath:swagger.properties"/>
-	<bean id="documentationConfig" class="com.mangofactory.swagger.configuration.SpringSwaggerConfig"></bean>
+	<context:annotation-config />
+	<bean id="documentationConfig" class="com.phroogal.web.documentation.swagger.CustomSwaggerConfig"></bean>
 		
 </beans>

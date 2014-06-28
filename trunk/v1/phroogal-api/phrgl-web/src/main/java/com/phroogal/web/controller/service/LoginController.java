@@ -25,6 +25,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.mangofactory.swagger.annotations.ApiIgnore;
 import com.phroogal.core.domain.User;
 import com.phroogal.core.domain.UserProfile;
 import com.phroogal.core.exception.UserEmailIsSocialLoginException;
@@ -36,8 +37,10 @@ import com.phroogal.core.valueobjects.UserCredentials;
 import com.phroogal.web.bean.UserBean;
 import com.phroogal.web.bean.UserCredentialsBean;
 import com.phroogal.web.bean.mapper.MapperService;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="login", description="Login Operations", position = 1)
 public class LoginController {
 	
 	@Autowired
@@ -97,6 +100,7 @@ public class LoginController {
 		}
 	}
 
+	@ApiIgnore
 	@RequestMapping(value = URI_LOGIN_PROVIDER, method = RequestMethod.POST)
 	public @ResponseBody
 	Object loginProvider(@PathVariable String providerId, @RequestParam("redirect") String redirect, NativeWebRequest request, HttpServletResponse response) {
@@ -104,6 +108,7 @@ public class LoginController {
 		return connectController.connect(providerId, request);
 	}
 	
+	@ApiIgnore
 	@RequestMapping(value = URI_LOGIN_PROVIDER, method=RequestMethod.GET, params="oauth_token")
 	public ModelAndView oauth1Callback(@PathVariable String providerId, NativeWebRequest webRequest, HttpServletRequest request, HttpServletResponse response) {
 		connectController.oauth1Callback(providerId, webRequest);
@@ -111,6 +116,7 @@ public class LoginController {
 		return new ModelAndView(resolveRedirect(webRequest));
 	}
 
+	@ApiIgnore
 	@RequestMapping(value = URI_LOGIN_PROVIDER, method=RequestMethod.GET, params="code")
 	public ModelAndView oauth2Callback(@PathVariable String providerId, @RequestParam("code") String code, NativeWebRequest webRequest, HttpServletRequest request, HttpServletResponse response) {
 		connectController.oauth2Callback(providerId, webRequest);
@@ -118,21 +124,23 @@ public class LoginController {
 		return new ModelAndView(resolveRedirect(webRequest));
 	}
 
+	@ApiIgnore
+	@RequestMapping(value = URI_LOGIN_PROVIDER, method=RequestMethod.DELETE)
+	public RedirectView removeConnections(@PathVariable String providerId, NativeWebRequest request) {
+		return connectController.removeConnections(providerId, request);
+	}
+
+	@ApiIgnore
+	@RequestMapping(value = URI_LOGIN_PROVIDER_USER, method=RequestMethod.DELETE)
+	public RedirectView removeConnection(@PathVariable String providerId, @PathVariable String providerUserId, NativeWebRequest request) {
+		return connectController.removeConnection(providerId, providerUserId, request);
+	}
+	
 	private String resolveRedirect(NativeWebRequest webRequest) {
 		StringBuffer sb = new StringBuffer("redirect:");
 		String redirectUri = (String) webRequest.getAttribute("redirectUri", RequestAttributes.SCOPE_SESSION);
 		sb.append(StringUtils.isEmpty(redirectUri) ? "/" : redirectUri);
 		return sb.toString();
-	}
-
-	@RequestMapping(value = URI_LOGIN_PROVIDER, method=RequestMethod.DELETE)
-	public RedirectView removeConnections(@PathVariable String providerId, NativeWebRequest request) {
-		return connectController.removeConnections(providerId, request);
-	}
-	
-	@RequestMapping(value = URI_LOGIN_PROVIDER_USER, method=RequestMethod.DELETE)
-	public RedirectView removeConnection(@PathVariable String providerId, @PathVariable String providerUserId, NativeWebRequest request) {
-		return connectController.removeConnection(providerId, providerUserId, request);
 	}
 	
 	private void loginRememberMeServices(HttpServletRequest request, HttpServletResponse response, boolean autoLogin) {

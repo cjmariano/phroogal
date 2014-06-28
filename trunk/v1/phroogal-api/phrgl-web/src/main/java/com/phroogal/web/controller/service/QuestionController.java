@@ -43,8 +43,10 @@ import com.phroogal.web.bean.QuestionIndexBean;
 import com.phroogal.web.bean.mapper.MapperService;
 import com.phroogal.web.controller.rest.RestPatchRequest;
 import com.phroogal.web.notification.FlagNotification;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="question", description="Question Operations", position = 6)
 @RequestMapping(URI_QUESTION_PREFIX)
 public class QuestionController extends BasicController<Question, QuestionBean, ObjectId> {
 

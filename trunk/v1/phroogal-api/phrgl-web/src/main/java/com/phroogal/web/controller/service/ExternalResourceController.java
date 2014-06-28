@@ -23,8 +23,10 @@ import com.phroogal.core.utility.CollectionUtil;
 import com.phroogal.web.bean.ExternalResourceBean;
 import com.phroogal.web.bean.ExternalResourceIndexBean;
 import com.phroogal.web.bean.mapper.MapperService;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="external resource", description="External Resource Operations", position = 15)
 public class ExternalResourceController {
 	
 	private static final int DEFAULT_RESULTS_COUNT = 10;

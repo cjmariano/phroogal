@@ -22,8 +22,10 @@ import com.phroogal.web.bean.UserBean;
 import com.phroogal.web.bean.UserSignupBean;
 import com.phroogal.web.bean.mapper.MapperService;
 import com.phroogal.web.notification.EmailConfirmationNotification;
+import com.wordnik.swagger.annotations.Api;
 
 @Controller
+@Api(value="signup", description="Signup Operations", position = 2)
 public class SignupController {
 	
 	@Autowired
