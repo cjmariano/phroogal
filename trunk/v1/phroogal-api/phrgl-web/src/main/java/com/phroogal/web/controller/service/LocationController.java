@@ -1,6 +1,6 @@
 package com.phroogal.web.controller.service;
 
-import static com.phroogal.web.context.WebApplicationContext.URI_LOCATION_SEARCH;
+import static com.phroogal.web.context.WebApplicationContext.URI_LOCATIONS;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class LocationController  {
 	@Autowired
 	private MapperService<LocationIndex, LocationIndexBean> locationMapper;
 	
-	@RequestMapping(value = URI_LOCATION_SEARCH, method = RequestMethod.GET)
+	@RequestMapping(value = URI_LOCATIONS, method = RequestMethod.GET)
 	public @ResponseBody
 	Object queryLocationsByKeyword(@RequestParam("keyword") String keyword, HttpServletRequest request, HttpServletResponse response) {
 		List<LocationIndex> locations = locationService.queryCitiesByKeyword(keyword);

@@ -1,6 +1,6 @@
 package com.phroogal.web.controller.service;
 
-import static com.phroogal.web.context.WebApplicationContext.URI_SIGNUP_POST;
+import static com.phroogal.web.context.WebApplicationContext.URI_SIGNUP;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +44,7 @@ public class SignupController {
 	@Qualifier(value="emailConfirmationNotification")
 	private EmailConfirmationNotification emailConfirmationNotification; 
 	
-	@RequestMapping(value = URI_SIGNUP_POST, method = RequestMethod.POST)
+	@RequestMapping(value = URI_SIGNUP, method = RequestMethod.POST)
 	public @ResponseBody Object signupUser(HttpServletRequest request, HttpServletResponse response, @RequestBody UserSignupBean userSignupBean)  {
 		User user = new User();
 		user.setProfile(userProfileMapper.toDomain(userSignupBean, UserProfile.class));

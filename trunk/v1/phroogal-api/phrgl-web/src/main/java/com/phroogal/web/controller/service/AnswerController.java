@@ -1,12 +1,8 @@
 package com.phroogal.web.controller.service;
 
-import static com.phroogal.web.context.WebApplicationContext.URI_ANSWER_DELETE;
-import static com.phroogal.web.context.WebApplicationContext.URI_ANSWER_GET;
-import static com.phroogal.web.context.WebApplicationContext.URI_ANSWER_GET_ALL;
-import static com.phroogal.web.context.WebApplicationContext.URI_ANSWER_PARTIAL_POST;
-import static com.phroogal.web.context.WebApplicationContext.URI_ANSWER_POST;
-import static com.phroogal.web.context.WebApplicationContext.URI_ANSWER_PREFIX;
-import static com.phroogal.web.context.WebApplicationContext.URI_ANSWER_VOTE_POST;
+import static com.phroogal.web.context.WebApplicationContext.URI_ANSWERS;
+import static com.phroogal.web.context.WebApplicationContext.URI_ANSWERS_ID;
+import static com.phroogal.web.context.WebApplicationContext.URI_ANSWERS_ID_VOTE;
 
 import java.util.List;
 
@@ -38,7 +34,6 @@ import com.wordnik.swagger.annotations.Api;
 
 @Controller
 @Api(value="answer", description="Answer Operations", position = 7)
-@RequestMapping(URI_ANSWER_PREFIX)
 public class AnswerController extends BasicController<Answer, AnswerBean, ObjectId> {
 	
 	@Autowired
@@ -56,57 +51,57 @@ public class AnswerController extends BasicController<Answer, AnswerBean, Object
 		return answerService;
 	}
 	
-	@RequestMapping(value = URI_ANSWER_POST, method = RequestMethod.POST)
+	@RequestMapping(value = URI_ANSWERS, method = RequestMethod.POST)
 	public @ResponseBody
 	Object addUpdateAnswer(HttpServletRequest request, HttpServletResponse response, @RequestBody AnswerBean answerBean) {
 		return super.addUpdateResource(request, response, answerBean);
 	}
 	
-	@RequestMapping(value = URI_ANSWER_GET, method = RequestMethod.GET)
+	@RequestMapping(value = URI_ANSWERS_ID, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getAnswer(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response) {
 		return super.getResource(id, request, response);
 	}
 	
-	@RequestMapping(value = URI_ANSWER_GET_ALL, method = RequestMethod.GET, params={"postBy","pageAt","pageSize"})
+	@RequestMapping(value = URI_ANSWERS, method = RequestMethod.GET, params={"postBy","pageAt","pageSize"})
 	public @ResponseBody
 	Object getAnswersByUser(@RequestParam("postBy") ObjectId userId, @RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		Page<Answer> resultsList = answerService.getByUserId(userId, pageAt, pageSize);
 		return getPaginatedResults(resultsList, AnswerBean.class);
 	}
 	
-	@RequestMapping(value = URI_ANSWER_PARTIAL_POST, method = RequestMethod.PATCH)
+	@RequestMapping(value = URI_ANSWERS_ID, method = RequestMethod.PATCH)
 	public @ResponseBody Object doPatchResource(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response, @RequestBody List<RestPatchRequest> patchRequest) throws Exception {
 		return super.doPatchResource(id, request, response, patchRequest);
 	}
 
-	@RequestMapping(value = URI_ANSWER_GET_ALL, method = RequestMethod.GET)
+	@RequestMapping(value = URI_ANSWERS, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getAllAnswers(HttpServletRequest request, HttpServletResponse response) {
 		return super.getAllResources(request, response);
 	}
 	
-	@RequestMapping(value = URI_ANSWER_GET_ALL, method = RequestMethod.GET, params={"pageAt", "pageSize"})
+	@RequestMapping(value = URI_ANSWERS, method = RequestMethod.GET, params={"pageAt", "pageSize"})
 	public @ResponseBody
 	Object getAllAnswers(@RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		return super.getAllResources(pageAt, pageSize, request, response);
 	}
 	
-	@RequestMapping(value = URI_ANSWER_GET_ALL, method = RequestMethod.GET, params={"showMostRecent=true","pageAt","pageSize"})
+	@RequestMapping(value = URI_ANSWERS, method = RequestMethod.GET, params={"showMostRecent=true","pageAt","pageSize"})
 	public @ResponseBody
 	Object getMostRecentAnswers(@RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		Page<Answer> resultsList = answerService.getRecentAnswers(pageAt, pageSize);
 		return getPaginatedResults(resultsList, AnswerBean.class);
 	}
 	
-	@RequestMapping(value = URI_ANSWER_GET_ALL, method = RequestMethod.GET, params={"showFlagged=true", "pageAt", "pageSize"})
+	@RequestMapping(value = URI_ANSWERS, method = RequestMethod.GET, params={"showFlagged=true", "pageAt", "pageSize"})
 	public @ResponseBody
 	Object getFlaggedAnswers(@RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		Page<Answer> resultsList = answerService.getFlaggedAnswers(pageAt, pageSize);
 		return getPaginatedResults(resultsList, AnswerBean.class);
 	}
 	
-	@RequestMapping(value = URI_ANSWER_VOTE_POST, method = RequestMethod.POST)
+	@RequestMapping(value = URI_ANSWERS_ID_VOTE, method = RequestMethod.POST)
 	public @ResponseBody
 	Object doUpdateAnswersVote(@PathVariable ObjectId id, @RequestParam("action") String action, HttpServletRequest request, HttpServletResponse response) {
 		VoteActionType voteAction = VoteActionType.get(action);
@@ -116,7 +111,7 @@ public class AnswerController extends BasicController<Answer, AnswerBean, Object
 		return getObjectMapper().toBean(answer, AnswerBean.class);
 	}
 	
-	@RequestMapping(value = URI_ANSWER_GET, method = RequestMethod.POST, params="action=flag")
+	@RequestMapping(value = URI_ANSWERS_ID, method = RequestMethod.POST, params="action=flag")
 	public @ResponseBody
 	Object flagAnswer(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response) {
 		Answer answer = answerService.findById(id);
@@ -125,7 +120,7 @@ public class AnswerController extends BasicController<Answer, AnswerBean, Object
 		return null;
 	}
 	
-	@RequestMapping(value = URI_ANSWER_DELETE, method = RequestMethod.DELETE)
+	@RequestMapping(value = URI_ANSWERS_ID, method = RequestMethod.DELETE)
 	public @ResponseBody
 	Object deleteAnswer(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response) {
 		super.deleteResource(id, request, response);

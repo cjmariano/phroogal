@@ -1,17 +1,9 @@
 package com.phroogal.web.controller.service;
 
 import static com.phroogal.web.context.WebApplicationContext.URI_QUESTIONS;
-import static com.phroogal.web.context.WebApplicationContext.URI_QUESTION_ANONYMOUS_TOGGLE;
-import static com.phroogal.web.context.WebApplicationContext.URI_QUESTION_DELETE;
-import static com.phroogal.web.context.WebApplicationContext.URI_QUESTION_GET;
-import static com.phroogal.web.context.WebApplicationContext.URI_QUESTION_GET_ALL;
-import static com.phroogal.web.context.WebApplicationContext.URI_QUESTION_PARTIAL_POST;
-import static com.phroogal.web.context.WebApplicationContext.URI_QUESTION_POST;
-import static com.phroogal.web.context.WebApplicationContext.URI_QUESTION_PREFIX;
-import static com.phroogal.web.context.WebApplicationContext.URI_QUESTION_SEARCH;
-import static com.phroogal.web.context.WebApplicationContext.URI_QUESTION_TOTAL_VIEW;
-import static com.phroogal.web.context.WebApplicationContext.URI_QUESTION_UPDATE_TAGS;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static com.phroogal.web.context.WebApplicationContext.URI_QUESTIONS_DOCID;
+import static com.phroogal.web.context.WebApplicationContext.URI_QUESTIONS_DOCID_TAGS;
+import static com.phroogal.web.context.WebApplicationContext.URI_QUESTIONS_TOTALVIEWCOUNT;
 
 import java.io.IOException;
 import java.util.List;
@@ -47,7 +39,6 @@ import com.wordnik.swagger.annotations.Api;
 
 @Controller
 @Api(value="question", description="Question Operations", position = 6)
-@RequestMapping(URI_QUESTION_PREFIX)
 public class QuestionController extends BasicController<Question, QuestionBean, ObjectId> {
 
 	@Autowired
@@ -68,31 +59,31 @@ public class QuestionController extends BasicController<Question, QuestionBean, 
 		return questionService;
 	}
 	
-	@RequestMapping(value = URI_QUESTION_POST, method = RequestMethod.POST)
+	@RequestMapping(value = URI_QUESTIONS, method = RequestMethod.POST)
 	public @ResponseBody
 	Object addUpdateQuestion(HttpServletRequest request, HttpServletResponse response, @RequestBody QuestionBean questionBean) {
 		return super.addUpdateResource(request, response, questionBean);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_GET, method = RequestMethod.GET)
+	@RequestMapping(value = URI_QUESTIONS_DOCID, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getQuestion(@PathVariable long id, HttpServletRequest request, HttpServletResponse response) {
 		Question question = questionService.getByDocId(id);
 		return getObjectMapper().toBean(question, QuestionBean.class);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_PARTIAL_POST, method = RequestMethod.PATCH)
+	@RequestMapping(value = URI_QUESTIONS_DOCID, method = RequestMethod.PATCH)
 	public @ResponseBody Object doPatchResource(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response, @RequestBody List<RestPatchRequest> patchRequest) throws Exception {
 		return super.doPatchResource(id, request, response, patchRequest);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_GET_ALL, method = RequestMethod.GET)
+	@RequestMapping(value = URI_QUESTIONS, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getAllQuestions(HttpServletRequest request, HttpServletResponse response) {
 		return super.getAllResources(request, response);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_GET_ALL, method = RequestMethod.GET, params={"pageAt", "pageSize"})
+	@RequestMapping(value = URI_QUESTIONS, method = RequestMethod.GET, params={"pageAt", "pageSize"})
 	public @ResponseBody
 	Object getAllQuestions(@RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		return super.getAllResources(pageAt, pageSize, request, response);
@@ -154,7 +145,7 @@ public class QuestionController extends BasicController<Question, QuestionBean, 
 		return getPaginatedResults(resultsList, QuestionIndexBean.class, indexMapper);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_SEARCH, method = GET, params={"keyword","topAnswer=true","pageAt","pageSize"})
+	@RequestMapping(value = URI_QUESTIONS, method = RequestMethod.GET, params={"keyword","topAnswer=true","pageAt","pageSize"})
 	public @ResponseBody
 	Object searchQuestionsByKeyword(@RequestParam("keyword") String keyword, @RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		userSearchHistoryService.addKeywordToUserSearchHistory(keyword);
@@ -162,35 +153,35 @@ public class QuestionController extends BasicController<Question, QuestionBean, 
 		return getPaginatedResults(resultsList, QuestionIndexBean.class, indexMapper);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_GET_ALL, method = RequestMethod.GET, params={"tag", "topAnswer=true","pageAt","pageSize"})
+	@RequestMapping(value = URI_QUESTIONS, method = RequestMethod.GET, params={"tag", "topAnswer=true","pageAt","pageSize"})
 	public @ResponseBody
 	Object searchQuestionsByTag(@RequestParam("tag") String tag, @RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		Page<QuestionIndex> resultsList = questionService.searchQuestionByTag(tag, pageAt, pageSize);
 		return getPaginatedResults(resultsList, QuestionIndexBean.class, indexMapper);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_SEARCH, method = GET, params="keyword")
+	@RequestMapping(value = URI_QUESTIONS, method = RequestMethod.GET, params="keyword")
 	public @ResponseBody
 	Object searchIndexedQuestionsByTitle(@RequestParam("keyword") String keyword, HttpServletRequest request, HttpServletResponse response) {
 		Page<QuestionIndex> indexedQuestions = questionService.searchIndexedQuestionByTitle(keyword, 0, 100);
 		return getPaginatedResults(indexedQuestions, QuestionIndexBean.class, indexMapper);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_SEARCH, method = GET, params={"keyword","showSimilar=true"})
+	@RequestMapping(value = URI_QUESTIONS, method = RequestMethod.GET, params={"keyword","showSimilar=true"})
 	public @ResponseBody
 	Object searchSimilarIndexedQuestions(@RequestParam("keyword") String keyword, @RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		Page<QuestionIndex> indexedQuestions = questionService.searchSimilarIndexedQuestion(keyword, pageAt, pageSize);
 		return getPaginatedResults(indexedQuestions, QuestionIndexBean.class, indexMapper);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_SEARCH, method = GET, params={"keyword","excludeDocId","showSimilar=true"})
+	@RequestMapping(value = URI_QUESTIONS, method = RequestMethod.GET, params={"keyword","excludeDocId","showSimilar=true"})
 	public @ResponseBody
 	Object searchSimilarIndexedQuestions(@RequestParam("keyword") String keyword, @RequestParam("excludeDocId") long excludeDocId, @RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		Page<QuestionIndex> indexedQuestions = questionService.searchSimilarIndexedQuestion(keyword, excludeDocId, pageAt, pageSize);
 		return getPaginatedResults(indexedQuestions, QuestionIndexBean.class, indexMapper);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_TOTAL_VIEW, method = RequestMethod.POST)
+	@RequestMapping(value = URI_QUESTIONS_TOTALVIEWCOUNT, method = RequestMethod.POST)
 	public @ResponseBody
 	Object doIncrementTotalViewsForQuestion(@PathVariable long id, HttpServletRequest request, HttpServletResponse response) {
 		questionService.incrementTotalViewsCount(id);
@@ -204,7 +195,7 @@ public class QuestionController extends BasicController<Question, QuestionBean, 
 		return null;
 	}
 	
-	@RequestMapping(value = URI_QUESTION_GET, method = RequestMethod.POST, params="action=flag")
+	@RequestMapping(value = URI_QUESTIONS_DOCID, method = RequestMethod.POST, params="action=flag")
 	public @ResponseBody
 	Object flagQuestion(@PathVariable long id, HttpServletRequest request, HttpServletResponse response) {
 		Question question = questionService.getByDocId(id);
@@ -213,22 +204,14 @@ public class QuestionController extends BasicController<Question, QuestionBean, 
 		return null;
 	}
 	
-	@RequestMapping(value = URI_QUESTION_DELETE, method = RequestMethod.DELETE)
+	@RequestMapping(value = URI_QUESTIONS_DOCID, method = RequestMethod.DELETE)
 	public @ResponseBody
 	Object deleteQuestion(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response) {
 		super.deleteResource(id, request, response);
 		return null;
 	}
 	
-	@RequestMapping(value = URI_QUESTION_ANONYMOUS_TOGGLE, method = RequestMethod.POST)
-	public @ResponseBody
-	Object doUpdateQuestionPostType(@PathVariable long id, @RequestParam("anonymous") boolean anonymous,HttpServletRequest request, HttpServletResponse response) {
-		Question question = questionService.getByDocId(id);
-		question.setAnonymous(anonymous);
-		return questionService.saveOrUpdate(question);
-	}
-	
-	@RequestMapping(value = URI_QUESTION_UPDATE_TAGS, method = RequestMethod.POST)
+	@RequestMapping(value = URI_QUESTIONS_DOCID_TAGS, method = RequestMethod.POST)
 	public @ResponseBody
 	Object doAddQuestionTags(@PathVariable long id, @PathVariable String tag, HttpServletRequest request, HttpServletResponse response) {
 		Question question = questionService.getByDocId(id);
@@ -236,7 +219,7 @@ public class QuestionController extends BasicController<Question, QuestionBean, 
 		return questionService.saveOrUpdate(question);
 	}
 	
-	@RequestMapping(value = URI_QUESTION_UPDATE_TAGS, method = RequestMethod.DELETE)
+	@RequestMapping(value = URI_QUESTIONS_DOCID_TAGS, method = RequestMethod.DELETE)
 	public @ResponseBody
 	Object doRemoveQuestionTags(@PathVariable long id, @PathVariable String tag, HttpServletRequest request, HttpServletResponse response) {
 		Question question = questionService.getByDocId(id);

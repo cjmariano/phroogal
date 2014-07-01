@@ -1,8 +1,7 @@
 package com.phroogal.web.controller.service;
 
 
-import static com.phroogal.web.context.WebApplicationContext.URI_TAG_GET_ALL;
-import static com.phroogal.web.context.WebApplicationContext.URI_TAG_SEARCH;
+import static com.phroogal.web.context.WebApplicationContext.URI_TAGS;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
@@ -38,40 +37,40 @@ public class TagController extends BasicController<Tag, TagBean, ObjectId> {
 		return tagService;
 	}
 	
-	@RequestMapping(value = URI_TAG_GET_ALL, method = RequestMethod.GET)
+	@RequestMapping(value = URI_TAGS, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getAllTag(HttpServletRequest request, HttpServletResponse response) {
 		return super.getAllResources(request, response);
 	}
 	
-	@RequestMapping(value = URI_TAG_GET_ALL, method = GET, params={"pageAt", "pageSize"})
+	@RequestMapping(value = URI_TAGS, method = GET, params={"pageAt", "pageSize"})
 	public @ResponseBody
 	Object getAllTags(@RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		Page<Tag> tags = tagService.getTagsSortByAscName(pageAt, pageSize);
 		return getPaginatedResults(tags, TagBean.class);
 	}
 	
-	@RequestMapping(value = URI_TAG_GET_ALL, method = GET, params={"pageAt", "pageSize", "sortByQuestionsTagged=true"})
+	@RequestMapping(value = URI_TAGS, method = GET, params={"pageAt", "pageSize", "sortByQuestionsTagged=true"})
 	public @ResponseBody
 	Object getAllTagsSortByDescTotalNumQuestionsTagged(@RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		Page<Tag> tags = tagService.getTagsSortByDescTotalNumQuestionsTagged (pageAt, pageSize);
 		return getPaginatedResults(tags, TagBean.class);
 	}
 	
-	@RequestMapping(value = URI_TAG_GET_ALL, method = RequestMethod.POST)
+	@RequestMapping(value = URI_TAGS, method = RequestMethod.POST)
 	public @ResponseBody
 	Object addUpdateTagList(HttpServletRequest request, HttpServletResponse response, @RequestBody List<TagBean> tagBeans) {
 		return super.addUpdateResourceList(request, response, tagBeans);
 	}
 	
-	@RequestMapping(value = URI_TAG_SEARCH, method = GET, params="keyword")
+	@RequestMapping(value = URI_TAGS, method = GET, params="keyword")
 	public @ResponseBody
 	Object searchIndexedTagName(@RequestParam String keyword, HttpServletRequest request, HttpServletResponse response) {
 		List<Tag> tags = tagService.findByNameStartingWith(keyword);
 		return getObjectMapper().toBean(tags, TagBean.class);
 	}
 	
-	@RequestMapping(value = URI_TAG_GET_ALL, method = GET, params={"pageAt", "pageSize", "showTrending=true"})
+	@RequestMapping(value = URI_TAGS, method = GET, params={"pageAt", "pageSize", "showTrending=true"})
 	public @ResponseBody
 	Object searchTrendingTags(@RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		Page<Tag> tags = tagService.getTrendingTags(pageAt, pageSize);

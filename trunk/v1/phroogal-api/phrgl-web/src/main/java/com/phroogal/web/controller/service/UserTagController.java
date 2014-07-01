@@ -1,9 +1,9 @@
 package com.phroogal.web.controller.service;
 
 
-import static com.phroogal.web.context.WebApplicationContext.URI_TAG_GET_ALL;
-import static com.phroogal.web.context.WebApplicationContext.URI_USER_TAG_POST;
-import static com.phroogal.web.context.WebApplicationContext.URI_USER_TAG_DELETE;
+import static com.phroogal.web.context.WebApplicationContext.URI_TAGS;
+import static com.phroogal.web.context.WebApplicationContext.URI_USERTAGS_USERID;
+import static com.phroogal.web.context.WebApplicationContext.URI_USERTAGS_ID;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
@@ -39,21 +39,21 @@ public class UserTagController extends BasicController<UserTag, UserTagBean, Obj
 		return userTagService;
 	}
 	
-	@RequestMapping(value = URI_USER_TAG_POST, method = RequestMethod.POST)
+	@RequestMapping(value = URI_USERTAGS_USERID, method = RequestMethod.POST)
 	public @ResponseBody
 	Object addUpdateUserTag(@PathVariable String id, HttpServletRequest request, HttpServletResponse response, @RequestBody UserTagBean userTagBean) {
 		userTagBean.setUserId(id);
 		return super.addUpdateResource(request, response, userTagBean);
 	}
 	
-	@RequestMapping(value = URI_TAG_GET_ALL, method = GET, params="userId")
+	@RequestMapping(value = URI_TAGS, method = GET, params="userId")
 	public @ResponseBody
 	Object getUserTagsByUserId(HttpServletRequest request, HttpServletResponse response, @RequestParam String userId) {
 		List<UserTag> userTags = userTagService.getByUserId(new ObjectId(userId));
 		return getObjectMapper().toBean(userTags, UserTagBean.class);
 	}
 	
-	@RequestMapping(value = URI_USER_TAG_DELETE, method = RequestMethod.DELETE)
+	@RequestMapping(value = URI_USERTAGS_ID, method = RequestMethod.DELETE)
 	public @ResponseBody
 	Object deleteUserTag(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response) {
 		super.deleteResource(id, request, response);
