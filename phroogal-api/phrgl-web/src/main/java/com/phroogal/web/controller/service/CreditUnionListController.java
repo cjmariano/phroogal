@@ -1,8 +1,6 @@
 package com.phroogal.web.controller.service;
 
-import static com.phroogal.web.context.WebApplicationContext.URI_CREDIT_UNION_GET_ALL;
-import static com.phroogal.web.context.WebApplicationContext.URI_CREDIT_UNION_PREFIX;
-import static com.phroogal.web.context.WebApplicationContext.URI_CREDIT_UNION_SEARCH;
+import static com.phroogal.web.context.WebApplicationContext.URI_CREDITUNIONS;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
@@ -26,7 +24,6 @@ import com.wordnik.swagger.annotations.Api;
 
 @Controller
 @Api(value="credit union", description="Credit Union Operations", position = 12)
-@RequestMapping(URI_CREDIT_UNION_PREFIX)
 public class CreditUnionListController extends BasicController<CreditUnion, CreditUnionBean, ObjectId> {
 
 	@Autowired
@@ -37,13 +34,13 @@ public class CreditUnionListController extends BasicController<CreditUnion, Cred
 		return creditUnionService;
 	}
 	
-	@RequestMapping(value = URI_CREDIT_UNION_GET_ALL, method = RequestMethod.GET)
+	@RequestMapping(value = URI_CREDITUNIONS, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getAllCreditUnion(HttpServletRequest request, HttpServletResponse response) {
 		return super.getAllResources(request, response);
 	}
 	
-	@RequestMapping(value = URI_CREDIT_UNION_SEARCH, method = GET, params="keyword")
+	@RequestMapping(value = URI_CREDITUNIONS, method = GET, params="keyword")
 	public @ResponseBody
 	Object searchIndexedCreditUniondsByName(@RequestParam String keyword, HttpServletRequest request, HttpServletResponse response) {
 		List<CreditUnion> results = creditUnionService.searchByName(keyword);

@@ -1,10 +1,7 @@
 package com.phroogal.web.controller.service;
 
-import static com.phroogal.web.context.WebApplicationContext.URI_COMMENT_GET;
-import static com.phroogal.web.context.WebApplicationContext.URI_COMMENT_GET_ALL;
-import static com.phroogal.web.context.WebApplicationContext.URI_COMMENT_PARTIAL_POST;
-import static com.phroogal.web.context.WebApplicationContext.URI_COMMENT_POST;
-import static com.phroogal.web.context.WebApplicationContext.URI_COMMENT_PREFIX;
+import static com.phroogal.web.context.WebApplicationContext.URI_COMMENTS;
+import static com.phroogal.web.context.WebApplicationContext.URI_COMMENTS_ID;
 
 import java.util.List;
 
@@ -30,7 +27,6 @@ import com.wordnik.swagger.annotations.Api;
 
 @Controller
 @Api(value="comment", description="Comment Operations", position = 8)
-@RequestMapping(URI_COMMENT_PREFIX)
 public class CommentController extends BasicController<Comment, CommentBean, ObjectId> {
 	
 	@Autowired
@@ -41,30 +37,30 @@ public class CommentController extends BasicController<Comment, CommentBean, Obj
 		return commentService;
 	}
 	
-	@RequestMapping(value = URI_COMMENT_POST, method = RequestMethod.POST)
+	@RequestMapping(value = URI_COMMENTS, method = RequestMethod.POST)
 	public @ResponseBody
 	Object addUpdateComment(HttpServletRequest request, HttpServletResponse response, @RequestBody CommentBean commentBean) {
 		return super.addUpdateResource(request, response, commentBean);
 	}
 	
-	@RequestMapping(value = URI_COMMENT_GET, method = RequestMethod.GET)
+	@RequestMapping(value = URI_COMMENTS_ID, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getComment(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response) {
 		return super.getResource(id, request, response);
 	}
 	
-	@RequestMapping(value = URI_COMMENT_PARTIAL_POST, method = RequestMethod.PATCH)
+	@RequestMapping(value = URI_COMMENTS_ID, method = RequestMethod.PATCH)
 	public @ResponseBody Object doPatchResource(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response, @RequestBody List<RestPatchRequest> patchRequest) throws Exception {
 		return super.doPatchResource(id, request, response, patchRequest);
 	}
 
-	@RequestMapping(value = URI_COMMENT_GET_ALL, method = RequestMethod.GET)
+	@RequestMapping(value = URI_COMMENTS, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getAllComments(HttpServletRequest request, HttpServletResponse response) {
 		return super.getAllResources(request, response);
 	}
 	
-	@RequestMapping(value = URI_COMMENT_GET_ALL, method = RequestMethod.GET, params={"pageAt", "pageSize"})
+	@RequestMapping(value = URI_COMMENTS, method = RequestMethod.GET, params={"pageAt", "pageSize"})
 	public @ResponseBody
 	Object getAllComments(@RequestParam("pageAt") int pageAt, @RequestParam("pageSize") int pageSize, HttpServletRequest request, HttpServletResponse response) {
 		return super.getAllResources(pageAt, pageSize, request, response);

@@ -1,8 +1,8 @@
 package com.phroogal.web.controller.service;
 
-import static com.phroogal.web.context.WebApplicationContext.URI_USER_REQUEST_PASSWORD_RESET;
-import static com.phroogal.web.context.WebApplicationContext.URI_USER_REQUEST_PASSWORD_RESET_GET;
-import static com.phroogal.web.context.WebApplicationContext.URI_USER_REQUEST_PASSWORD_RESET_POST;
+import static com.phroogal.web.context.WebApplicationContext.URI_PASSWORD_RESET_REQUEST;
+import static com.phroogal.web.context.WebApplicationContext.URI_PASSWORD_RESET_REQUEST_ID;
+import static com.phroogal.web.context.WebApplicationContext.URI_PASSWORD_RESET_REQUEST_ID_PASSWORD;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,7 +52,7 @@ public class PasswordResetController extends BasicController<PasswordResetReques
 	}
 	
 	
-	@RequestMapping(value = URI_USER_REQUEST_PASSWORD_RESET, method=RequestMethod.POST)
+	@RequestMapping(value = URI_PASSWORD_RESET_REQUEST, method=RequestMethod.POST)
 	public @ResponseBody
 	Object requestPasswordReset(HttpServletRequest request, HttpServletResponse response, @RequestBody PasswordResetRequestBean passwordResetRequestBean) {
 		String email = passwordResetRequestBean.getEmail(); 
@@ -62,7 +62,7 @@ public class PasswordResetController extends BasicController<PasswordResetReques
 		return null;
 	}
 	
-	@RequestMapping(value = URI_USER_REQUEST_PASSWORD_RESET_POST, method = RequestMethod.POST)
+	@RequestMapping(value = URI_PASSWORD_RESET_REQUEST_ID_PASSWORD, method = RequestMethod.POST)
 	public @ResponseBody
 	Object processPasswordReset(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response, @RequestBody UserCredentialsBean userCredentialsBean)  {
 		String newPassword = userCredentialsBean.getPassword();
@@ -74,7 +74,7 @@ public class PasswordResetController extends BasicController<PasswordResetReques
 		return null;
 	}
 	
-	@RequestMapping(value = URI_USER_REQUEST_PASSWORD_RESET_GET, method = RequestMethod.GET)
+	@RequestMapping(value = URI_PASSWORD_RESET_REQUEST_ID, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getPasswordReset(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response) {
 		return super.getResource(id, request, response);

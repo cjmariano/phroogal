@@ -1,10 +1,7 @@
 package com.phroogal.web.controller.service;
 
-import static com.phroogal.web.context.WebApplicationContext.URI_REPLY_GET;
-import static com.phroogal.web.context.WebApplicationContext.URI_REPLY_GET_ALL;
-import static com.phroogal.web.context.WebApplicationContext.URI_REPLY_PARTIAL_POST;
-import static com.phroogal.web.context.WebApplicationContext.URI_REPLY_POST;
-import static com.phroogal.web.context.WebApplicationContext.URI_REPLY_PREFIX;
+import static com.phroogal.web.context.WebApplicationContext.URI_REPLIES;
+import static com.phroogal.web.context.WebApplicationContext.URI_REPLIES_ID;
 
 import java.util.List;
 
@@ -29,7 +26,6 @@ import com.wordnik.swagger.annotations.Api;
 
 @Controller
 @Api(value="reply", description="Reply Operations", position = 9)
-@RequestMapping(URI_REPLY_PREFIX)
 public class ReplyController extends BasicController<Reply, ReplyBean, ObjectId> {
 	
 	@Autowired
@@ -40,24 +36,24 @@ public class ReplyController extends BasicController<Reply, ReplyBean, ObjectId>
 		return replyService;
 	}
 	
-	@RequestMapping(value = URI_REPLY_POST, method = RequestMethod.POST)
+	@RequestMapping(value = URI_REPLIES, method = RequestMethod.POST)
 	public @ResponseBody
 	Object addUpdateReply(HttpServletRequest request, HttpServletResponse response, @RequestBody ReplyBean replyBean) {
 		return super.addUpdateResource(request, response, replyBean);
 	}
 	
-	@RequestMapping(value = URI_REPLY_GET, method = RequestMethod.GET)
+	@RequestMapping(value = URI_REPLIES_ID, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getReply(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response) {
 		return super.getResource(id, request, response);
 	}
 	
-	@RequestMapping(value = URI_REPLY_PARTIAL_POST, method = RequestMethod.PATCH)
+	@RequestMapping(value = URI_REPLIES_ID, method = RequestMethod.PATCH)
 	public @ResponseBody Object doPatchResource(@PathVariable ObjectId id, HttpServletRequest request, HttpServletResponse response, @RequestBody List<RestPatchRequest> patchRequest) throws Exception {
 		return super.doPatchResource(id, request, response, patchRequest);
 	}
 	
-	@RequestMapping(value = URI_REPLY_GET_ALL, method = RequestMethod.GET)
+	@RequestMapping(value = URI_REPLIES, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getAllReplies(HttpServletRequest request, HttpServletResponse response) {
 		return super.getAllResources(request, response);

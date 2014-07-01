@@ -1,9 +1,6 @@
 package com.phroogal.web.controller.service;
 
-import static com.phroogal.web.context.WebApplicationContext.URI_COLLEGES_GET_ALL;
-import static com.phroogal.web.context.WebApplicationContext.URI_COLLEGES_PREFIX;
-import static com.phroogal.web.context.WebApplicationContext.URI_COLLEGES_SEARCH;
-import static com.phroogal.web.context.WebApplicationContext.URI_COLLEGE_POST;
+import static com.phroogal.web.context.WebApplicationContext.URI_COLLEGES;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
@@ -30,7 +27,6 @@ import com.wordnik.swagger.annotations.Api;
 
 @Controller
 @Api(value="college", description="College Operations", position = 11)
-@RequestMapping(URI_COLLEGES_PREFIX)
 public class CollegeController extends BasicController<College, CollegeBean, ObjectId> {
 
 	@Autowired
@@ -44,18 +40,18 @@ public class CollegeController extends BasicController<College, CollegeBean, Obj
 		return collegeService;
 	}
 	
-	@RequestMapping(value = URI_COLLEGES_GET_ALL, method = RequestMethod.GET)
+	@RequestMapping(value = URI_COLLEGES, method = RequestMethod.GET)
 	public @ResponseBody
 	Object getAllColleges(HttpServletRequest request, HttpServletResponse response) {
 		return super.getAllResources(request, response);
 	}
-	@RequestMapping(value = URI_COLLEGE_POST, method = RequestMethod.POST)
+	@RequestMapping(value = URI_COLLEGES, method = RequestMethod.POST)
 	public @ResponseBody
 	Object addUpdateQuestion(HttpServletRequest request, HttpServletResponse response, @RequestBody CollegeBean collegeBean) {
 		return super.addUpdateResource(request, response, collegeBean);
 	}
 	
-	@RequestMapping(value = URI_COLLEGES_SEARCH, method = GET, params="keyword")
+	@RequestMapping(value = URI_COLLEGES, method = GET, params="keyword")
 	public @ResponseBody
 	Object searchIndexedCollegesByTitle(@RequestParam String keyword, HttpServletRequest request, HttpServletResponse response) {
 		List<College> indexedColleges = collegeService.findByNameContaining(keyword);

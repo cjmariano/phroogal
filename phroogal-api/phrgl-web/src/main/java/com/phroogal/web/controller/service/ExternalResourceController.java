@@ -1,7 +1,7 @@
 package com.phroogal.web.controller.service;
 
-import static com.phroogal.web.context.WebApplicationContext.URI_EXTERNAL_RESOURCE_SEARCH;
-import static com.phroogal.web.context.WebApplicationContext.URI_EXTERNAL_RESOURCE_SEARCH_ALL;
+import static com.phroogal.web.context.WebApplicationContext.URI_EXTERNAL_RESOURCE_CATEGORY;
+import static com.phroogal.web.context.WebApplicationContext.URI_EXTERNAL_RESOURCE;
 
 import java.util.List;
 
@@ -43,14 +43,14 @@ public class ExternalResourceController {
 	@Autowired
 	private MapperService<ExternalResource, ExternalResourceIndexBean> externalResourceMapper;
 	
-	@RequestMapping(value = URI_EXTERNAL_RESOURCE_SEARCH_ALL, method = RequestMethod.GET)
+	@RequestMapping(value = URI_EXTERNAL_RESOURCE, method = RequestMethod.GET)
 	public @ResponseBody
 	Object searchAllExternalResourceByTitle(@RequestParam("keyword") String keyword, @RequestParam(defaultValue="1") Long start, HttpServletRequest request, HttpServletResponse response) {
 		List<ExternalResource> externalResource = externalResourceService.getResourceByKeyword(keyword, start);
 		return returnExternalSearchResults(externalResource, start, request);
 	}
 	
-	@RequestMapping(value = URI_EXTERNAL_RESOURCE_SEARCH, method = RequestMethod.GET)
+	@RequestMapping(value = URI_EXTERNAL_RESOURCE_CATEGORY, method = RequestMethod.GET)
 	public @ResponseBody
 	Object searchExternalResourceByTitle(@PathVariable("category") String category, @RequestParam("keyword") String keyword, @RequestParam(defaultValue="1") Long start, HttpServletRequest request, HttpServletResponse response) {
 		List<ExternalResource> externalResource = externalResourceService.getResourceByKeyword(category, keyword, start);

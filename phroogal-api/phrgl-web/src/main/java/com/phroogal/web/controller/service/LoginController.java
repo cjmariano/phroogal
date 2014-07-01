@@ -1,7 +1,7 @@
 package com.phroogal.web.controller.service;
 
 import static com.phroogal.web.context.WebApplicationContext.URI_LOGIN;
-import static com.phroogal.web.context.WebApplicationContext.URI_LOGIN_PROVIDER;
+import static com.phroogal.web.context.WebApplicationContext.URI_LOGIN_SOCIAL;
 import static com.phroogal.web.context.WebApplicationContext.URI_LOGIN_PROVIDER_USER;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +38,7 @@ import com.phroogal.web.bean.UserBean;
 import com.phroogal.web.bean.UserCredentialsBean;
 import com.phroogal.web.bean.mapper.MapperService;
 import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 
 @Controller
 @Api(value="login", description="Login Operations", position = 1)
@@ -69,6 +70,7 @@ public class LoginController {
 	@Autowired
 	private ConnectController connectController;
 	
+	@ApiOperation(value = "Login by username and password")
 	@RequestMapping(value = URI_LOGIN, method = RequestMethod.POST, params={"_spring_security_remember_me", "redirect"})
 	public @ResponseBody
 	Object login(@RequestParam("redirect") String redirect, HttpServletRequest request, HttpServletResponse response, @RequestBody UserCredentialsBean userCredentialsBean) throws Throwable {
@@ -84,7 +86,7 @@ public class LoginController {
 		}
 	}
 
-	@RequestMapping(value = URI_LOGIN_PROVIDER, method = RequestMethod.POST)
+	@RequestMapping(value = URI_LOGIN_SOCIAL, method = RequestMethod.POST)
 	public @ResponseBody
 	Object loginProvider(@PathVariable String providerId, @RequestParam("redirect") String redirect, NativeWebRequest request, HttpServletResponse response) {
 		request.setAttribute("redirectUri", redirect, RequestAttributes.SCOPE_SESSION);
@@ -92,7 +94,7 @@ public class LoginController {
 	}
 	
 	@ApiIgnore
-	@RequestMapping(value = URI_LOGIN_PROVIDER, method=RequestMethod.GET, params="oauth_token")
+	@RequestMapping(value = URI_LOGIN_SOCIAL, method=RequestMethod.GET, params="oauth_token")
 	public ModelAndView oauth1Callback(@PathVariable String providerId, NativeWebRequest webRequest, HttpServletRequest request, HttpServletResponse response) {
 		connectController.oauth1Callback(providerId, webRequest);
 		loginRememberMeServices(request, response, true);
@@ -100,7 +102,7 @@ public class LoginController {
 	}
 
 	@ApiIgnore
-	@RequestMapping(value = URI_LOGIN_PROVIDER, method=RequestMethod.GET, params="code")
+	@RequestMapping(value = URI_LOGIN_SOCIAL, method=RequestMethod.GET, params="code")
 	public ModelAndView oauth2Callback(@PathVariable String providerId, @RequestParam("code") String code, NativeWebRequest webRequest, HttpServletRequest request, HttpServletResponse response) {
 		connectController.oauth2Callback(providerId, webRequest);
 		loginRememberMeServices(request, response, true);
@@ -108,7 +110,7 @@ public class LoginController {
 	}
 
 	@ApiIgnore
-	@RequestMapping(value = URI_LOGIN_PROVIDER, method=RequestMethod.DELETE)
+	@RequestMapping(value = URI_LOGIN_SOCIAL, method=RequestMethod.DELETE)
 	public RedirectView removeConnections(@PathVariable String providerId, NativeWebRequest request) {
 		return connectController.removeConnections(providerId, request);
 	}
