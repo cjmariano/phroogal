@@ -34,7 +34,7 @@
 		<joda.time.version>2.2</joda.time.version>
 		<orika.core.version>1.4.1</orika.core.version>
 		<org.aspectj.version>1.7.2</org.aspectj.version>
-		<commons.beanutils.version>1.8.3</commons.beanutils.version>
+		<commons.beanutils.version>1.9.2</commons.beanutils.version>
 		<thymeleaf.version>2.0.16</thymeleaf.version>
 		<thymeleaf.extras.springsecurity3.version>2.0.0</thymeleaf.extras.springsecurity3.version>
 		<nekohtml.version>1.9.6.2</nekohtml.version>
