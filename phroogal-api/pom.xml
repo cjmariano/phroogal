@@ -38,7 +38,7 @@
 		<thymeleaf.version>2.0.16</thymeleaf.version>
 		<thymeleaf.extras.springsecurity3.version>2.0.0</thymeleaf.extras.springsecurity3.version>
 		<nekohtml.version>1.9.6.2</nekohtml.version>
-		<junit.version>4.11</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<mockito.all.version>1.9.5</mockito.all.version>
 		<slf4j.log4j12.version>1.7.5</slf4j.log4j12.version>
 		<log4j.version>1.2.17</log4j.version>
