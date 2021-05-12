@@ -23,7 +23,7 @@
 		<javax.mail.version>1.5.0-b01</javax.mail.version>
 		<org.springframework.security>3.1.4.RELEASE</org.springframework.security>
 		<spring.data.solr>1.1.0.RC1</spring.data.solr>
-		<solr.core>4.3.1</solr.core>
+		<solr.core>8.8.2</solr.core>
 		<ehcache.version>2.7.4</ehcache.version>
 		<aws.java.sdk.version>1.6.10</aws.java.sdk.version>
 		<org.drools.version>5.6.0.Final</org.drools.version>
