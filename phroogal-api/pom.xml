@@ -26,7 +26,7 @@
 		<solr.core>4.3.1</solr.core>
 		<ehcache.version>2.7.4</ehcache.version>
 		<aws.java.sdk.version>1.6.10</aws.java.sdk.version>
-		<org.drools.version>5.6.0.Final</org.drools.version>
+		<org.drools.version>7.60.0.Final</org.drools.version>
 		<org.mongeez.version>0.9.4</org.mongeez.version>
 		<google.api.customsearch.version>v1-rev20-1.15.0-rc</google.api.customsearch.version>
 		<google.api.client.appengine.version>1.15.0-rc</google.api.client.appengine.version>
